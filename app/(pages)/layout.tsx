@@ -1,3 +1,4 @@
+import BottomBar from "@/components/bottom-bar";
 import TopBar from "@/components/top-bar";
 
 export default function PagesLayout({
@@ -8,7 +9,8 @@ export default function PagesLayout({
   return (
     <div>
       <TopBar />
-      {children}
+      <div className="pt-[53px] pb-[73px]">{children}</div>
+      <BottomBar />
     </div>
   );
 }
