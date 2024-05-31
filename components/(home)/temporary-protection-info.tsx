@@ -1,5 +1,5 @@
 interface TemporaryProtectionInfoProps {
-  title: "구조장소" | "보호지역" | "품종";
+  title: "작성날짜" | "구조장소" | "임보장소" | "품종";
   value: string;
   detail?: string | null;
 }

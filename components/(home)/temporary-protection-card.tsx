@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import TemporaryProtectionInfo from "./temporary-protection-info";
+import TemporaryProtectionGender from "./temporary-protection-gender";
+import TemporaryProtectionIsActive from "./temporary-protection-isActive";
+import formatDate from "@/utils/formatDate";
 
 interface TemporaryProtectionCardProps {
   id: number;
@@ -27,41 +30,26 @@ export default function TemporaryProtectionCard({
 }: TemporaryProtectionCardProps) {
   return (
     <Link
-      className="w-full h-36 px-5 flex items-center border border-neutral-100"
+      className={`w-full h-40 px-5 flex items-center border border-neutral-100 bg-white ${
+        !isActive ? "opacity-60" : ""
+      }`}
       href={`/temporary-protection/${id}`}
     >
-      <div className="relative size-28 overflow-hidden rounded-md">
-        <Image
-          fill
-          src="https://images.unsplash.com/photo-1608643071978-71b760d25cbd?q=80&w=1168&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="구조 동물 사진"
-          className="object-cover"
-        />
+      <div className="relative size-32 overflow-hidden rounded-md">
+        <Image fill src={photo} alt="구조 동물 사진" className="object-cover" />
       </div>
       <div className="flex flex-col px-2">
         <div className="flex items-center gap-2">
-          <div
-            className={`${
-              isActive
-                ? "bg-green-100 text-green-600"
-                : "bg-neutral-100 text-neutral-600"
-            } p-1 rounded-md text-xs font-semibold `}
-          >
-            {isActive ? "보호중" : "완료"}
-          </div>
-          <div
-            className={`${
-              gender === "암컷"
-                ? "bg-red-100 text-red-600"
-                : "bg-blue-100 text-blue-600"
-            } p-1 rounded-md text-xs font-semibold `}
-          >
-            {gender}
-          </div>
+          <TemporaryProtectionIsActive isActive={isActive} />
+          <TemporaryProtectionGender gender={gender} />
         </div>
-        <TemporaryProtectionInfo title="구조장소" value={rescuePlace} />
-        <TemporaryProtectionInfo title="보호지역" value={area} />
+        <TemporaryProtectionInfo
+          title="작성날짜"
+          value={formatDate(createdAt.toString())}
+        />
         <TemporaryProtectionInfo title="품종" value={species} detail={detail} />
+        <TemporaryProtectionInfo title="구조장소" value={rescuePlace} />
+        <TemporaryProtectionInfo title="임보장소" value={area} />
       </div>
     </Link>
   );

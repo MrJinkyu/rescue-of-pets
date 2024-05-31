@@ -4,7 +4,7 @@ import { getTemporaryProtections } from "./action";
 export default async function Home() {
   const temporaryProtections = await getTemporaryProtections();
   return (
-    <section>
+    <section className="bg-neutral-100">
       <TemporaryProtectionList initList={temporaryProtections} />
     </section>
   );
