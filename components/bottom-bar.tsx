@@ -20,7 +20,7 @@ import { usePathname } from "next/navigation";
 export default function BottomBar() {
   const pathname = usePathname();
   return (
-    <div className="fixed bottom-0 w-full max-w-screen-sm mx-auto grid grid-cols-5 px-2 py-3 border-neutral-200 border-t">
+    <div className="fixed bottom-0 w-full max-w-screen-sm mx-auto grid grid-cols-5 py-3 border-neutral-200 border-t z-20 bg-white">
       <Link href="/" className="flex flex-col items-center">
         {pathname === "/" ? (
           <SolidHomeIcon className="size-7 text-mainColor" />
@@ -32,7 +32,7 @@ export default function BottomBar() {
             pathname === "/" ? "text-mainColor" : "text-neutral-500"
           }`}
         >
-          보호소
+          임시보호
         </span>
       </Link>
       <Link href="report" className="flex flex-col items-center">
