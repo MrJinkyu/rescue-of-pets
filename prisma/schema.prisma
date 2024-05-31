@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id Int @id @default(autoincrement())
+
+  username String
+  email String? @unique
+  password String?
+  avatar String?
+  phone String? @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  temporary_protections TemporaryProtection[]
+}
+
+model TemporaryProtection{
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  isActive Boolean
+  gender String
+  species String
+  detail String?
+  description String?
+  rescuePlace String
+  area String
+  photo String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+}
