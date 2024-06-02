@@ -18,10 +18,10 @@ export default function TemporaryProtectionList({
   initList,
 }: TemporaryProtectionListProps) {
   return (
-    <div>
+    <>
       {initList.map((item) => (
         <TemporaryProtectionCard key={item.id} {...item} />
       ))}
-    </div>
+    </>
   );
 }

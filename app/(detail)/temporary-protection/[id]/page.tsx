@@ -5,6 +5,7 @@ import TemporaryProtectionIsActive from "@/components/(home)/temporary-protectio
 import TemporaryProtectionGender from "@/components/(home)/temporary-protection-gender";
 import TemporaryProtectionInfo from "@/components/(home)/temporary-protection-info";
 import formatTimeAgo from "@/utils/formatTimeAgo";
+import SubmitButton from "@/components/submit-button";
 
 export default async function TemporaryProtectionDetail({
   params,
@@ -52,8 +53,8 @@ export default async function TemporaryProtectionDetail({
           </div>
         </div>
         <div className="flex flex-col">
-          <TemporaryProtectionInfo title="구조장소" value={rescuePlace} />
-          <TemporaryProtectionInfo title="임보장소" value={area} />
+          <TemporaryProtectionInfo title="구조 장소" value={rescuePlace} />
+          <TemporaryProtectionInfo title="임보 지역" value={area} />
         </div>
         {description && (
           <div className="bg-neutral-100 rounded-md p-4 my-4 text-sm">
@@ -61,9 +62,7 @@ export default async function TemporaryProtectionDetail({
           </div>
         )}
       </div>
-      <button className="fixed bottom-0 w-full max-w-screen-sm bg-mainColor text-white font-semibold text-lg py-3">
-        입양문의
-      </button>
+      <SubmitButton text="입양문의" />
     </div>
   );
 }

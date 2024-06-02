@@ -15,6 +15,9 @@ export async function getTemporaryProtections() {
       area: true,
       photo: true,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return temporaryProtections;
 }

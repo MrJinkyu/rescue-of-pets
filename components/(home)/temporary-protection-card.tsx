@@ -44,12 +44,12 @@ export default function TemporaryProtectionCard({
           <TemporaryProtectionGender gender={gender} />
         </div>
         <TemporaryProtectionInfo
-          title="작성날짜"
+          title="작성 날짜"
           value={formatDate(createdAt.toString())}
         />
         <TemporaryProtectionInfo title="품종" value={species} detail={detail} />
-        <TemporaryProtectionInfo title="구조장소" value={rescuePlace} />
-        <TemporaryProtectionInfo title="임보장소" value={area} />
+        <TemporaryProtectionInfo title="구조 장소" value={rescuePlace} />
+        <TemporaryProtectionInfo title="임보 지역" value={area} />
       </div>
     </Link>
   );
