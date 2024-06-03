@@ -5,7 +5,7 @@ import TemporaryProtectionIsActive from "@/components/(home)/temporary-protectio
 import TemporaryProtectionGender from "@/components/(home)/temporary-protection-gender";
 import TemporaryProtectionInfo from "@/components/(home)/temporary-protection-info";
 import formatTimeAgo from "@/utils/formatTimeAgo";
-import SubmitButton from "@/components/submit-button";
+import SubmitButton from "@/components/common/submit-button";
 
 export default async function TemporaryProtectionDetail({
   params,

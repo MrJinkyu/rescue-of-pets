@@ -1,4 +1,4 @@
-import DetailTopBar from "@/components/detail-top-bar";
+import DetailTopBar from "@/components/common/detail-top-bar";
 
 export default function DetailPageLayout({
   children,

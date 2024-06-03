@@ -1,5 +1,5 @@
-import BottomBar from "@/components/bottom-bar";
-import TopBar from "@/components/top-bar";
+import BottomBar from "@/components/common/bottom-bar";
+import TopBar from "@/components/common/top-bar";
 
 export default function PagesLayout({
   children,

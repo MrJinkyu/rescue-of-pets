@@ -1,13 +1,13 @@
 "use client";
 
 import { PhotoIcon } from "@heroicons/react/24/solid";
-import LabelAndSelectBar from "@/components/label-and-select-bar";
+import LabelAndSelectBar from "@/components/common/label-and-select-bar";
 import { createTemporaryProtection } from "@/app/(add)/temporary-protection/new/action";
 import { useFormState } from "react-dom";
-import SubmitButton from "@/components/submit-button";
+import SubmitButton from "@/components/common/submit-button";
 import { useState } from "react";
-import InputText from "../input-text";
-import Textarea from "../textarea";
+import InputText from "../common/input-text";
+import Textarea from "../common/textarea";
 
 export default function TemporaryProtectionForm() {
   const genderOptions = ["미확인", "암컷", "수컷"];

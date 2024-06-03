@@ -1,5 +1,5 @@
 import TemporaryProtectionForm from "@/components/(add)/temporary-protection-form";
-import AddTopBar from "@/components/add-top-bar";
+import AddTopBar from "@/components/common/add-top-bar";
 
 export default function NewTemporaryProtection() {
   return (
