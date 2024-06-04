@@ -4,7 +4,6 @@ import Line from "@/components/(auth)/line";
 import SmsButton from "@/components/(auth)/sms-button";
 import AddTopBar from "@/components/common/add-top-bar";
 import Link from "next/link";
-import React from "react";
 
 export default function Login() {
   return (
@@ -21,8 +20,15 @@ export default function Login() {
             name="email"
             type="email"
             placeholder="이메일을 입력해주세요"
+            required
           />
-          <Input label="비밀번호" name="password" type="password" />
+          <Input
+            label="비밀번호"
+            name="password"
+            type="password"
+            placeholder="비밀번호를 입력해주세요"
+            required
+          />
           <AuthButton text="로그인" />
         </form>
         <div className="flex items-center">
