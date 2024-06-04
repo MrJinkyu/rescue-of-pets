@@ -1,11 +1,15 @@
+"use client";
+
 import AuthButton from "@/components/(auth)/auth-button";
 import Input from "@/components/(auth)/input";
 import Line from "@/components/(auth)/line";
 import SmsButton from "@/components/(auth)/sms-button";
 import AddTopBar from "@/components/common/add-top-bar";
-import Link from "next/link";
+import { useFormState } from "react-dom";
+import { createUser } from "./action";
 
 export default function CreateAccount() {
+  const [state, dispatch] = useFormState(createUser, null);
   return (
     <section className=" flex flex-col items-center justify-center w-full h-screen">
       <AddTopBar title="회원가입" />
@@ -14,12 +18,13 @@ export default function CreateAccount() {
           <p className="font-semibold text-3xl">Create Account</p>
           <p className="text-md text-neutral-400">please enter your details</p>
         </div>
-        <form className="flex flex-col gap-4 w-3/4">
+        <form action={dispatch} className="flex flex-col gap-4 w-3/4">
           <Input
             label="닉네임"
             name="username"
             type="text"
             placeholder="닉네임을 입력해주세요"
+            errors={state?.fieldErrors.username}
             required
           />
           <Input
@@ -27,6 +32,7 @@ export default function CreateAccount() {
             name="email"
             type="email"
             placeholder="이메일을 입력해주세요"
+            errors={state?.fieldErrors.email}
             required
           />
           <Input
@@ -34,6 +40,7 @@ export default function CreateAccount() {
             name="password"
             type="password"
             placeholder="비밀번호를 입력해주세요"
+            errors={state?.fieldErrors.password}
             required
           />
           <Input
@@ -41,6 +48,7 @@ export default function CreateAccount() {
             name="password_confirm"
             type="password"
             placeholder="비밀번호를 확인해주세요"
+            errors={state?.fieldErrors.password_confirm}
             required
           />
           <AuthButton text="회원가입" />
