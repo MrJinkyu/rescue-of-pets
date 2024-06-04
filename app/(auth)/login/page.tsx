@@ -1,11 +1,16 @@
+"use client";
+
 import AuthButton from "@/components/(auth)/auth-button";
 import Input from "@/components/(auth)/input";
 import Line from "@/components/(auth)/line";
 import SmsButton from "@/components/(auth)/sms-button";
 import AddTopBar from "@/components/common/add-top-bar";
 import Link from "next/link";
+import { useFormState } from "react-dom";
+import { loginUser } from "./action";
 
 export default function Login() {
+  const [state, dispatch] = useFormState(loginUser, null);
   return (
     <section className=" flex flex-col items-center justify-center w-full h-screen">
       <AddTopBar title="로그인" />
@@ -14,12 +19,13 @@ export default function Login() {
           <p className="font-semibold text-3xl">Login Account</p>
           <p className="text-md text-neutral-400">please enter your details</p>
         </div>
-        <form className="flex flex-col gap-4 w-3/4">
+        <form action={dispatch} className="flex flex-col gap-4 w-3/4">
           <Input
             label="이메일"
             name="email"
             type="email"
             placeholder="이메일을 입력해주세요"
+            errors={state?.fieldErrors.email}
             required
           />
           <Input
@@ -27,6 +33,7 @@ export default function Login() {
             name="password"
             type="password"
             placeholder="비밀번호를 입력해주세요"
+            errors={state?.fieldErrors.password}
             required
           />
           <AuthButton text="로그인" />
