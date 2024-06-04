@@ -1,3 +1,7 @@
+import AuthButton from "@/components/(auth)/auth-button";
+import Input from "@/components/(auth)/input";
+import Line from "@/components/(auth)/line";
+import SmsButton from "@/components/(auth)/sms-button";
 import AddTopBar from "@/components/common/add-top-bar";
 import Link from "next/link";
 import React from "react";
@@ -12,31 +16,14 @@ export default function Login() {
           <p className="text-md text-neutral-400">please enter your details</p>
         </div>
         <form className="flex flex-col gap-4 w-3/4">
-          <div className="w-full flex flex-col gap-2">
-            <label htmlFor="email" className="font-semibold">
-              이메일
-            </label>
-            <input
-              type="email"
-              id="email"
-              placeholder="이메일을 입력해주세요"
-              className="border-none outline-none flex-1 ring-neutral-400 ring-2 rounded-sm p-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="w-full flex flex-col gap-2">
-            <label htmlFor="password" className="font-semibold">
-              비밀번호
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="border-none outline-none flex-1 ring-neutral-400 ring-2 rounded-sm p-2  focus:ring-blue-500"
-            />
-          </div>
-          <button className="border-none outline-none flex-1 mt-4 bg-blue-500 text-white font-semibold p-3 rounded-md">
-            로그인
-          </button>
+          <Input
+            label="이메일"
+            name="email"
+            type="email"
+            placeholder="이메일을 입력해주세요"
+          />
+          <Input label="비밀번호" name="password" type="password" />
+          <AuthButton text="로그인" />
         </form>
         <div className="flex items-center">
           <span className="mr-2">아직 계정이 없으신가요?</span>
@@ -47,10 +34,8 @@ export default function Login() {
             회원가입
           </Link>
         </div>
-        <div className="bg-neutral-600 w-3/4 h-0.5" />
-        <div className="border-blue-500 border-2 w-3/4 text-center text-blue-500 font-semibold rounded-md p-3">
-          간편 SMS 로그인
-        </div>
+        <Line />
+        <SmsButton />
       </main>
     </section>
   );
