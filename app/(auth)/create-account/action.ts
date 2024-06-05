@@ -86,7 +86,6 @@ export async function createUser(_: any, formData: FormData) {
   };
   const results = await formSchema.safeParseAsync(data);
   if (!results.success) {
-    console.log(results.error.flatten());
     return results.error.flatten();
   } else {
     // 비밀번호 암호화
