@@ -19,7 +19,9 @@ export default function SmsLogin() {
       <main className="flex flex-col items-center gap-8 w-full">
         <div className="flex flex-col gap-2 items-center text-black">
           <p className="font-semibold text-3xl">SMS Login</p>
-          <p className="text-md text-neutral-400">please enter your details</p>
+          <p className="text-md text-neutral-400">
+            현재 SMS 로그인을 지원하지 않습니다
+          </p>
         </div>
         <form action={dispatch} className="flex flex-col gap-4 w-3/4">
           <div className="w-full flex flex-col gap-2">

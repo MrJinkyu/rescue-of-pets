@@ -91,6 +91,7 @@ export async function smsLogin(prevState: ActionState, formData: FormData) {
           },
         },
       });
+
       return {
         token: true,
       };

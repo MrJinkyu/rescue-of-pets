@@ -1,6 +1,7 @@
 "use server";
 
 import prismaDB from "@/database/db";
+import { getSession } from "@/session/getSession";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -14,13 +15,14 @@ const dataSchema = z.object({
 });
 
 export async function addTemporaryProtection(data: any) {
+  const user = await getSession();
   const temporaryProtection = prismaDB.temporaryProtection.create({
     data: {
       ...data,
       isActive: true,
       user: {
         connect: {
-          id: 1,
+          id: user.id,
         },
       },
     },
