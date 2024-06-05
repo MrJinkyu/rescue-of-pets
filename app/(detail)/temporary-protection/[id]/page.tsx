@@ -39,7 +39,7 @@ export default async function TemporaryProtectionDetail({
   const isOwner = userId === user.id;
   return (
     <div>
-      <DetailTopBar isOwner={isOwner} />
+      <DetailTopBar isOwner={isOwner} id={temporaryProtection.id} />
       <div className="relative aspect-square mt-[53px]">
         <Image src={photo} alt={species} fill className="object-cover" />
       </div>

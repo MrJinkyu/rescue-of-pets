@@ -4,7 +4,13 @@ import BottomActionSheet from "../(detail)/bottom-action-sheet";
 import BackButton from "./back-button";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 
-export default function DetailTopBar({ isOwner }: { isOwner: boolean }) {
+export default function DetailTopBar({
+  isOwner,
+  id,
+}: {
+  isOwner: boolean;
+  id: number;
+}) {
   const onClick = () => {
     if (isOwner) {
       setVisible(true);
@@ -25,7 +31,10 @@ export default function DetailTopBar({ isOwner }: { isOwner: boolean }) {
         className="size-6 cursor-pointer"
       />
       {visible && (
-        <BottomActionSheet cancelBottomActionSheet={cancelBottomActionSheet} />
+        <BottomActionSheet
+          id={id}
+          cancelBottomActionSheet={cancelBottomActionSheet}
+        />
       )}
     </div>
   );
