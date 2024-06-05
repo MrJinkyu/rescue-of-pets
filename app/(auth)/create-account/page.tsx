@@ -11,14 +11,14 @@ import { createUser } from "./action";
 export default function CreateAccount() {
   const [state, dispatch] = useFormState(createUser, null);
   return (
-    <section className=" flex flex-col items-center justify-center w-full h-screen">
+    <section className="flex flex-col items-center justify-center w-full h-screen md:pt-[53px]">
       <AddTopBar title="회원가입" />
-      <main className="flex flex-col items-center gap-8 w-full">
+      <main className="flex flex-col items-center gap-6 w-full">
         <div className="flex flex-col gap-2 items-center text-black">
           <p className="font-semibold text-3xl">Create Account</p>
           <p className="text-md text-neutral-400">please enter your details</p>
         </div>
-        <form action={dispatch} className="flex flex-col gap-4 w-3/4">
+        <form action={dispatch} className="flex flex-col gap-3 w-3/4">
           <Input
             label="닉네임"
             name="username"
