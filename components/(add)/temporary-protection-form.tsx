@@ -106,20 +106,29 @@ export default function TemporaryProtectionForm() {
         name="gender"
         className="hidden"
         value={options.gender}
+        onChange={() => {}}
       />
       <input
         type="text"
         name="species"
         className="hidden"
         value={options.species}
+        onChange={() => {}}
       />
       <input
         type="text"
         name="detail"
         className="hidden"
         value={options.detail}
+        onChange={() => {}}
       />
-      <input type="text" name="area" className="hidden" value={options.area} />
+      <input
+        type="text"
+        name="area"
+        className="hidden"
+        value={options.area}
+        onChange={() => {}}
+      />
       <SubmitButton text="작성하기" />
     </form>
   );
