@@ -9,16 +9,13 @@ import SubmitButton from "@/components/common/submit-button";
 import DetailTopBar from "@/components/common/detail-top-bar";
 import { getSession } from "@/session/getSession";
 
-// async function waitUi() {
-//   await new Promise((resolve) => setTimeout(resolve, 5000));
-// }
-
 export default async function TemporaryProtectionDetail({
   params,
 }: {
   params: { id: number };
 }) {
   const id = Number(params.id);
+
   if (isNaN(id)) {
     notFound();
   }
