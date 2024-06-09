@@ -46,7 +46,7 @@ export default function BottomNavigationBar() {
             pathname === "/report" ? "text-mainColor" : "text-neutral-500"
           }`}
         >
-          실종/제보
+          실종신고
         </span>
       </Link>
       <Link href="/story" className="flex flex-col items-center">

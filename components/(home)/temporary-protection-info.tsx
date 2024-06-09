@@ -1,5 +1,5 @@
-interface TemporaryProtectionInfoProps {
-  title: "작성 날짜" | "구조 장소" | "임보 지역" | "품종";
+interface CardInfoProps {
+  title: string;
   value: string;
   detail?: string | null;
 }
@@ -8,7 +8,7 @@ export default function TemporaryProtectionInfo({
   title,
   value,
   detail,
-}: TemporaryProtectionInfoProps) {
+}: CardInfoProps) {
   return (
     <div className="flex items-center gap-2">
       <span className="text-sm flex-shrink-0 text-neutral-700">{title}</span>

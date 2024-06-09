@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <section className="w-full flex-1 bg-neutral-100">
       <TemporaryProtectionList initList={temporaryProtections} />
-      <AddButton />
+      <AddButton category="temporary-protection" />
     </section>
   );
 }

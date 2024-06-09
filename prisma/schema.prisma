@@ -21,6 +21,7 @@ model User{
 
   sms_token SMSToken[]
   temporary_protections TemporaryProtection[]
+  reports Report[]
 }
 
 model SMSToken{
@@ -46,6 +47,29 @@ model TemporaryProtection{
   rescuePlace String
   area String
   photo String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+}
+
+model Report{
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  isActive Boolean
+  missingPlace String
+  species String
+  detail String?
+  gender String
+  characteristics String?
+  description String?
+  photo String
+  name String
+  age Int
+  weight Int
+  color String
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
