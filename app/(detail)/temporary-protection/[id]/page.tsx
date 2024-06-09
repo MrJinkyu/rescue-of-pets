@@ -8,18 +8,16 @@ import formatTimeAgo from "@/utils/formatTimeAgo";
 import SubmitButton from "@/components/common/submit-button";
 import DetailTopBar from "@/components/common/detail-top-bar";
 import { getSession } from "@/session/getSession";
-import { resolve } from "path";
 
-async function waitUi() {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-}
+// async function waitUi() {
+//   await new Promise((resolve) => setTimeout(resolve, 5000));
+// }
 
 export default async function TemporaryProtectionDetail({
   params,
 }: {
   params: { id: number };
 }) {
-  const test = await waitUi();
   const id = Number(params.id);
   if (isNaN(id)) {
     notFound();

@@ -1,10 +1,11 @@
 "use client";
 
-import { PencilIcon } from "@heroicons/react/24/solid";
 import ModalOverlay from "../common/modal-overlay";
 import ModalCancelButton from "./modal-cancel-button";
-import { TrashIcon } from "@heroicons/react/24/solid";
-import { deleteTemporaryProtection } from "@/app/(detail)/temporary-protection/[id]/action";
+import {
+  deleteTemporaryProtection,
+  updateTemporaryProtection,
+} from "@/app/(detail)/temporary-protection/[id]/action";
 
 interface BottomActionSheetProps {
   id: number;
@@ -22,16 +23,17 @@ export default function BottomActionSheet({
           <div className="flex items-center text-neutral-400 text-sm">
             작업을 선택하세요
           </div>
-          <div className="flex gap-2 items-center justify-center flex-1  cursor-pointer text-black font-semibold">
-            <PencilIcon className="size-4" />
-            <span>글 수정하기</span>
-          </div>
+          <form
+            action={() => updateTemporaryProtection(id)}
+            className="flex gap-2 items-center justify-center flex-1  cursor-pointer text-black font-semibold"
+          >
+            <button>임시보호 완료</button>
+          </form>
           <form
             action={() => deleteTemporaryProtection(id)}
             className="flex gap-2 items-center justify-center flex-1 cursor-pointer text-black font-semibold"
           >
-            <TrashIcon className="size-4" />
-            <button>글 지우기</button>
+            <button>글 내리기</button>
           </form>
           <ModalCancelButton
             cancelBottomActionSheet={cancelBottomActionSheet}

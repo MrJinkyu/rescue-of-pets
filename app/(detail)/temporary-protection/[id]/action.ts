@@ -21,3 +21,15 @@ export async function deleteTemporaryProtection(id: number) {
   });
   redirect("/");
 }
+
+export async function updateTemporaryProtection(id: number) {
+  await prismaDB.temporaryProtection.update({
+    where: {
+      id,
+    },
+    data: {
+      isActive: false,
+    },
+  });
+  redirect("/");
+}
