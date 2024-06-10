@@ -1,16 +1,21 @@
 "use client";
+
 import { useState } from "react";
 import BottomActionSheet from "../(detail)/bottom-action-sheet";
 import BackButton from "./back-button";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 
+interface DetailTopBarProps {
+  isOwner: boolean;
+  id: number;
+  category: "temporary-protection" | "report" | "story";
+}
+
 export default function DetailTopBar({
   isOwner,
   id,
-}: {
-  isOwner: boolean;
-  id: number;
-}) {
+  category,
+}: DetailTopBarProps) {
   const onClick = () => {
     if (isOwner) {
       setVisible(true);
@@ -33,6 +38,7 @@ export default function DetailTopBar({
       {visible && (
         <BottomActionSheet
           id={id}
+          category={category}
           cancelBottomActionSheet={cancelBottomActionSheet}
         />
       )}

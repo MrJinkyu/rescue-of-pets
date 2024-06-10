@@ -1,19 +1,18 @@
 "use client";
 
+import { deletePost, updatePost } from "@/app/(detail)/action";
 import ModalOverlay from "../common/modal-overlay";
 import ModalCancelButton from "./modal-cancel-button";
-import {
-  deleteTemporaryProtection,
-  updateTemporaryProtection,
-} from "@/app/(detail)/temporary-protection/[id]/action";
 
 interface BottomActionSheetProps {
   id: number;
+  category: "temporary-protection" | "report" | "story";
   cancelBottomActionSheet: () => void;
 }
 
 export default function BottomActionSheet({
   id,
+  category,
   cancelBottomActionSheet,
 }: BottomActionSheetProps) {
   return (
@@ -24,16 +23,16 @@ export default function BottomActionSheet({
             작업을 선택하세요
           </div>
           <form
-            action={() => updateTemporaryProtection(id)}
+            action={() => updatePost(id, category)}
             className="flex gap-2 items-center justify-center flex-1  cursor-pointer text-black font-semibold"
           >
-            <button>임시보호 완료</button>
+            <button>완료처리</button>
           </form>
           <form
-            action={() => deleteTemporaryProtection(id)}
+            action={() => deletePost(id, category)}
             className="flex gap-2 items-center justify-center flex-1 cursor-pointer text-black font-semibold"
           >
-            <button>글 내리기</button>
+            <button>삭제하기</button>
           </form>
           <ModalCancelButton
             cancelBottomActionSheet={cancelBottomActionSheet}

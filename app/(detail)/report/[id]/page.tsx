@@ -42,7 +42,7 @@ export default async function ReportDetail({
   const isOwner = userId === user.id;
   return (
     <section>
-      <DetailTopBar isOwner={isOwner} id={report.id} />
+      <DetailTopBar isOwner={isOwner} id={report.id} category="report" />
       <ProfileBar avatar={avatar} username={username} createdAt={createdAt} />
       <div className="relative aspect-square">
         <Image src={photo} alt={species} fill className="object-cover" />
