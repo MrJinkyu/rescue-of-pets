@@ -52,8 +52,12 @@ export default function ReportCard({
       <div className="text-xs pb-2">
         {name} / {age}살 / {gender} / {weight}kg / {color}
       </div>
-      <ReportInfo title="실종 장소" value={missingPlace} />
-      <ReportInfo title="작성 날짜" value={formatDate(createdAt.toString())} />
+      <ReportInfo title="실종 장소" value={missingPlace} size="xs" />
+      <ReportInfo
+        title="작성 날짜"
+        value={formatDate(createdAt.toString())}
+        size="xs"
+      />
     </Link>
   );
 }

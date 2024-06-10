@@ -1,15 +1,14 @@
 import { notFound } from "next/navigation";
-import { getTemporaryProtection } from "./action";
-import Image from "next/image";
-import TemporaryProtectionIsActive from "@/components/(home)/temporary-protection-isActive";
-import TemporaryProtectionGender from "@/components/(home)/temporary-protection-gender";
-import TemporaryProtectionInfo from "@/components/(home)/temporary-protection-info";
-import SubmitButton from "@/components/common/submit-button";
-import DetailTopBar from "@/components/common/detail-top-bar";
+import { getReport } from "./action";
 import { getSession } from "@/session/getSession";
+import DetailTopBar from "@/components/common/detail-top-bar";
 import ProfileBar from "@/components/common/profile-bar";
+import Image from "next/image";
+import ReportIsActive from "@/components/(report)/report-isActive";
+import ReportInfo from "@/components/(report)/report-info";
+import SubmitButton from "@/components/common/submit-button";
 
-export default async function TemporaryProtectionDetail({
+export default async function ReportDetail({
   params,
 }: {
   params: { id: string };
@@ -18,8 +17,8 @@ export default async function TemporaryProtectionDetail({
   if (isNaN(id)) {
     notFound();
   }
-  const temporaryProtection = await getTemporaryProtection(id);
-  if (!temporaryProtection) {
+  const report = await getReport(id);
+  if (!report) {
     notFound();
   }
   const {
@@ -28,18 +27,22 @@ export default async function TemporaryProtectionDetail({
     detail,
     gender,
     isActive,
-    rescuePlace,
-    area,
+    missingPlace,
     createdAt,
     description,
     userId,
+    age,
+    name,
+    weight,
+    color,
+    characteristics,
     user: { username, avatar },
-  } = temporaryProtection;
+  } = report;
   const user = await getSession();
   const isOwner = userId === user.id;
   return (
     <section>
-      <DetailTopBar isOwner={isOwner} id={temporaryProtection.id} />
+      <DetailTopBar isOwner={isOwner} id={report.id} />
       <ProfileBar avatar={avatar} username={username} createdAt={createdAt} />
       <div className="relative aspect-square">
         <Image src={photo} alt={species} fill className="object-cover" />
@@ -50,13 +53,17 @@ export default async function TemporaryProtectionDetail({
             {species} {detail ? `[${detail}]` : ""}
           </div>
           <div className="flex items-center gap-2">
-            <TemporaryProtectionIsActive isActive={isActive} />
-            <TemporaryProtectionGender gender={gender} />
+            <ReportIsActive isActive={isActive} />
           </div>
         </div>
         <div className="flex flex-col">
-          <TemporaryProtectionInfo title="구조 장소" value={rescuePlace} />
-          <TemporaryProtectionInfo title="임보 지역" value={area} />
+          <ReportInfo title="이름" value={name} size="sm" />
+          <ReportInfo title="성별" value={gender} size="sm" />
+          <ReportInfo title="나이" value={`${age}살`} size="sm" />
+          <ReportInfo title="몸무게" value={`${weight}kg`} size="sm" />
+          <ReportInfo title="털색" value={color} size="sm" />
+          <ReportInfo title="특징" value={characteristics} size="sm" />
+          <ReportInfo title="실종 장소" value={missingPlace} size="sm" />
         </div>
         {description && (
           <div className="bg-neutral-100 rounded-md p-4 my-4 text-sm">
@@ -64,7 +71,7 @@ export default async function TemporaryProtectionDetail({
           </div>
         )}
       </div>
-      <SubmitButton text="입양문의" />
+      <SubmitButton text="채팅하기" />
     </section>
   );
 }

@@ -63,7 +63,7 @@ model Report{
   species String
   detail String?
   gender String
-  characteristics String?
+  characteristics String
   description String?
   photo String
   name String
