@@ -4,10 +4,10 @@ import Image from "next/image";
 import TemporaryProtectionIsActive from "@/components/(home)/temporary-protection-isActive";
 import TemporaryProtectionGender from "@/components/(home)/temporary-protection-gender";
 import TemporaryProtectionInfo from "@/components/(home)/temporary-protection-info";
-import formatTimeAgo from "@/utils/formatTimeAgo";
 import SubmitButton from "@/components/common/submit-button";
 import DetailTopBar from "@/components/common/detail-top-bar";
 import { getSession } from "@/session/getSession";
+import ProfileBar from "@/components/common/profile-bar";
 
 export default async function TemporaryProtectionDetail({
   params,
@@ -15,7 +15,6 @@ export default async function TemporaryProtectionDetail({
   params: { id: number };
 }) {
   const id = Number(params.id);
-
   if (isNaN(id)) {
     notFound();
   }
@@ -34,24 +33,21 @@ export default async function TemporaryProtectionDetail({
     createdAt,
     description,
     userId,
+    user: { username, avatar },
   } = temporaryProtection;
   const user = await getSession();
   const isOwner = userId === user.id;
   return (
     <div>
       <DetailTopBar isOwner={isOwner} id={temporaryProtection.id} />
-      <div className="relative aspect-square mt-[53px]">
+      <ProfileBar avatar={avatar} username={username} createdAt={createdAt} />
+      <div className="relative aspect-square">
         <Image src={photo} alt={species} fill className="object-cover" />
       </div>
       <div className="flex flex-col p-4 pb-[52px]">
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <span className="font-bold">
-              {species} {detail ? `[${detail}]` : ""}
-            </span>
-            <span className="text-neutral-400">
-              {formatTimeAgo(createdAt.toString())}
-            </span>
+          <div className="font-bold">
+            {species} {detail ? `[${detail}]` : ""}
           </div>
           <div className="flex items-center gap-2">
             <TemporaryProtectionIsActive isActive={isActive} />

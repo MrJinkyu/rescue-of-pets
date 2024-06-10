@@ -8,6 +8,14 @@ export async function getTemporaryProtection(id: number) {
     where: {
       id,
     },
+    include: {
+      user: {
+        select: {
+          avatar: true,
+          username: true,
+        },
+      },
+    },
   });
   return temporaryProtections;
 }

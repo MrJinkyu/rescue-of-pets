@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import TemporaryProtectionCard from "./temporary-protection-card";
-import { getMoreTemporaryProtections } from "@/app/(pages)/action";
+import { getMoreTemporaryProtections } from "@/app/(pages)/(home)/action";
 
 interface TemporaryProtectionListProps {
   initList: {
