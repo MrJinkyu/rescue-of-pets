@@ -59,6 +59,7 @@ model Report{
   updatedAt DateTime @updatedAt
 
   isActive Boolean
+  area String
   missingPlace String
   species String
   detail String?
@@ -67,8 +68,8 @@ model Report{
   description String?
   photo String
   name String
-  age Int
-  weight Int
+  age String
+  weight String
   color String
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

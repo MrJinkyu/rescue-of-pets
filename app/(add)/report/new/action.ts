@@ -9,14 +9,23 @@ const dataSchema = z.object({
   photo: z.string({
     required_error: "사진은 필수 항목입니다",
   }),
-  rescuePlace: z
-    .string({ required_error: "구조 장소는 필수 항목입니다" })
-    .min(1, "구조 장소는 최소 1자 이상입니다"),
+  name: z
+    .string({ required_error: "이름은 필수 항목입니다" })
+    .min(1, "이름은 최소 1자 이상입니다"),
+  color: z
+    .string({ required_error: "털색은 필수 항목입니다" })
+    .min(1, "털색은 최소 1자 이상입니다"),
+  characteristics: z
+    .string({ required_error: "특징은 필수 항목입니다" })
+    .min(1, "특징은 최소 1자 이상입니다"),
+  missingPlace: z
+    .string({ required_error: "실종 장소는 필수 항목입니다" })
+    .min(1, "실종 장소는 최소 1자 이상입니다"),
 });
 
-export async function addTemporaryProtection(data: any) {
+export async function addReport(data: any) {
   const user = await getSession();
-  const temporaryProtection = prismaDB.temporaryProtection.create({
+  const report = prismaDB.report.create({
     data: {
       ...data,
       isActive: true,
@@ -30,17 +39,22 @@ export async function addTemporaryProtection(data: any) {
       id: true,
     },
   });
-  return temporaryProtection;
+  return report;
 }
 
-export async function createTemporaryProtection(_: any, formData: FormData) {
+export async function createReport(_: any, formData: FormData) {
   const data = {
     photo: formData.get("photo"),
-    gender: formData.get("gender"),
     species: formData.get("species"),
     detail: formData.get("detail"),
+    gender: formData.get("gender"),
+    age: formData.get("age"),
+    weight: formData.get("weight"),
     area: formData.get("area"),
-    rescuePlace: formData.get("rescuePlace"),
+    name: formData.get("name"),
+    color: formData.get("color"),
+    characteristics: formData.get("characteristics"),
+    missingPlace: formData.get("missingPlace"),
     description: formData.get("description"),
   };
 
@@ -53,8 +67,8 @@ export async function createTemporaryProtection(_: any, formData: FormData) {
   if (!results.success) {
     return results.error.flatten();
   } else {
-    const res = await addTemporaryProtection(data);
-    redirect(`/temporary-protection/${res.id}`);
+    const res = await addReport(data);
+    redirect(`/report/${res.id}`);
   }
 }
 

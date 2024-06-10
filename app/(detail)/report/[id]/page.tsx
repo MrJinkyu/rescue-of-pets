@@ -59,8 +59,8 @@ export default async function ReportDetail({
         <div className="flex flex-col">
           <ReportInfo title="이름" value={name} size="sm" />
           <ReportInfo title="성별" value={gender} size="sm" />
-          <ReportInfo title="나이" value={`${age}살`} size="sm" />
-          <ReportInfo title="몸무게" value={`${weight}kg`} size="sm" />
+          <ReportInfo title="나이" value={age} size="sm" />
+          <ReportInfo title="몸무게" value={weight} size="sm" />
           <ReportInfo title="털색" value={color} size="sm" />
           <ReportInfo title="특징" value={characteristics} size="sm" />
           <ReportInfo title="실종 장소" value={missingPlace} size="sm" />

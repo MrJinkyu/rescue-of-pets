@@ -11,8 +11,8 @@ interface ReportListProps {
     gender: string;
     photo: string;
     name: string;
-    age: number;
-    weight: number;
+    age: string;
+    weight: string;
     color: string;
   }[];
 }

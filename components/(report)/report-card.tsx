@@ -14,8 +14,8 @@ interface ReportCardPorps {
   gender: string;
   photo: string;
   name: string;
-  age: number;
-  weight: number;
+  age: string;
+  weight: string;
   color: string;
 }
 
@@ -49,8 +49,8 @@ export default function ReportCard({
           {species} {detail ? `[${detail}]` : ""}
         </div>
       </div>
-      <div className="text-xs pb-2">
-        {name} / {age}살 / {gender} / {weight}kg / {color}
+      <div className="text-xs pb-2 overflow-hidden whitespace-nowrap truncate">
+        {gender} / {age} / {weight} / {color}
       </div>
       <ReportInfo title="실종 장소" value={missingPlace} size="xs" />
       <ReportInfo

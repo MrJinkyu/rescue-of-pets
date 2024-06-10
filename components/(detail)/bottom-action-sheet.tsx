@@ -26,13 +26,13 @@ export default function BottomActionSheet({
             action={() => updatePost(id, category)}
             className="flex gap-2 items-center justify-center flex-1  cursor-pointer text-black font-semibold"
           >
-            <button>완료처리</button>
+            <button>완료로 수정하기</button>
           </form>
           <form
             action={() => deletePost(id, category)}
             className="flex gap-2 items-center justify-center flex-1 cursor-pointer text-black font-semibold"
           >
-            <button>삭제하기</button>
+            <button>글 삭제하기</button>
           </form>
           <ModalCancelButton
             cancelBottomActionSheet={cancelBottomActionSheet}
