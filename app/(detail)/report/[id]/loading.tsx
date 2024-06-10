@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TemporaryProtectionDetailLoading() {
+export default function ReportDetailLoading() {
   return (
     <div className="*:animate-pulse">
       <div className="w-full px-4 py-3 flex justify-between items-center mt-[53px]">
@@ -22,6 +22,11 @@ export default function TemporaryProtectionDetailLoading() {
           </div>
         </div>
         <div className="flex flex-col gap-1">
+          <div className="w-24 h-5 bg-neutral-400 rounded-md" />
+          <div className="w-24 h-5 bg-neutral-400 rounded-md" />
+          <div className="w-24 h-5 bg-neutral-400 rounded-md" />
+          <div className="w-24 h-5 bg-neutral-400 rounded-md" />
+          <div className="w-24 h-5 bg-neutral-400 rounded-md" />
           <div className="w-24 h-5 bg-neutral-400 rounded-md" />
           <div className="w-24 h-5 bg-neutral-400 rounded-md" />
         </div>
