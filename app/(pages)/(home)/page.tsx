@@ -11,7 +11,7 @@ export default async function Home() {
   const temporaryProtections = await getInitTemporaryProtections();
 
   return (
-    <section className="w-full flex-1 bg-neutral-100">
+    <section className="w-full">
       <TemporaryProtectionList initList={temporaryProtections} />
       <AddButton category="temporary-protection" />
     </section>

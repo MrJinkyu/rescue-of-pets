@@ -13,7 +13,6 @@ interface ReportCardPorps {
   detail: string | null;
   gender: string;
   photo: string;
-  name: string;
   age: string;
   weight: string;
   color: string;
@@ -23,7 +22,6 @@ export default function ReportCard({
   id,
   createdAt,
   isActive,
-  name,
   age,
   weight,
   color,

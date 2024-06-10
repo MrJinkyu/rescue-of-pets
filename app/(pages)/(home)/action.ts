@@ -15,7 +15,7 @@ export async function getInitTemporaryProtections() {
       area: true,
       photo: true,
     },
-    take: 5,
+    take: 10,
     orderBy: {
       createdAt: "desc",
     },
@@ -36,8 +36,8 @@ export async function getMoreTemporaryProtections(page: number) {
       area: true,
       photo: true,
     },
-    skip: 5 * page,
-    take: 5,
+    skip: 10 * page,
+    take: 10,
     orderBy: {
       createdAt: "desc",
     },

@@ -5,7 +5,7 @@ import ReportList from "@/components/(report)/report-list";
 export default async function Report() {
   const reports = await getInitReports();
   return (
-    <section className="w-full flex-1 bg-neutral-100">
+    <section className="w-full">
       <ReportList initList={reports} />
       <AddButton category="report" />
     </section>
