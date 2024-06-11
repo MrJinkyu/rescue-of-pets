@@ -22,6 +22,9 @@ model User{
   sms_token SMSToken[]
   temporary_protections TemporaryProtection[]
   reports Report[]
+  storys Story[]
+  comments Comment[]
+  likes Like[]
 }
 
 model SMSToken{
@@ -72,6 +75,49 @@ model Report{
   weight String
   color String
 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+}
+
+model Story{
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title String
+  contents String?
+  photo String
+  view Int @default(0)
+  comments Comment[]
+  likes Like[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+}
+
+model Comment{
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  payload String
+
+  story Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  storyId Int
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+}
+
+model Like{
+  @@id(name:"id",[userId,storyId])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  story Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  storyId Int
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 }

@@ -6,15 +6,21 @@ interface ProfileBarProps {
   avatar: string | null;
   username: string;
   createdAt: Date;
+  isStory?: boolean;
 }
 
 export default function ProfileBar({
   avatar,
   username,
   createdAt,
+  isStory = false,
 }: ProfileBarProps) {
   return (
-    <div className="w-full px-4 py-3 flex justify-between  items-center mt-[53px]">
+    <div
+      className={`w-full px-4 py-3 flex justify-between  items-center ${
+        isStory ? "" : "mt-[53px]"
+      }`}
+    >
       <div className="flex items-center gap-2">
         {avatar ? (
           <div className="bg-neutral-300 rounded-full flex justify-center items-center size-8 overflow-hidden">
