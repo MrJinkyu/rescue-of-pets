@@ -63,7 +63,7 @@ export default async function TemporaryProtectionDetail({
           <TemporaryProtectionInfo title="임보 지역" value={area} />
         </div>
         {description && (
-          <div className="bg-neutral-100 rounded-md p-4 my-4 text-sm">
+          <div className="bg-neutral-100 rounded-md p-4 my-4 text-sm break-words">
             {description}
           </div>
         )}

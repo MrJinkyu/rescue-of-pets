@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
+import ModalOverlay from "./modal-overlay";
 interface SelectBarProps {
   title: string;
   name: string;
@@ -21,7 +22,7 @@ export default function SelectBar({
     closeBar();
   };
   return (
-    <section className="w-full max-w-screen-sm h-full z-30 fixed top-0 left-0 right-0 mx-auto bg-neutral-950/50">
+    <ModalOverlay cancelBottomActionSheet={closeBar}>
       <article className="fixed bottom-0 flex flex-col w-full max-w-screen-sm h-[280px] bg-white text-black animate-fadeInUp">
         <header className="flex justify-between py-4 px-6">
           <ChevronLeftIcon
@@ -45,6 +46,6 @@ export default function SelectBar({
           })}
         </main>
       </article>
-    </section>
+    </ModalOverlay>
   );
 }

@@ -26,6 +26,7 @@ export default function LabelAndSelectBar({
       <div className="w-full flex items-center">
         <Label title={title} />
         <button
+          type="button"
           onClick={() => setIsVisible((prev) => !prev)}
           className={`cursor-pointer text-neutral-500 border-none outline-none ring-1 ring-neutral-300 px-4 py-2 rounded-sm focus:ring-mainColor focus:text-mainColor`}
         >

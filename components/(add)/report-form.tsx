@@ -8,22 +8,17 @@ import { useState } from "react";
 import InputText from "../common/input-text";
 import Textarea from "../common/textarea";
 import { createReport } from "@/app/(add)/report/new/action";
+import {
+  ageOptions,
+  areaOptions,
+  detailCatOptions,
+  detailDogOptions,
+  genderOptions,
+  speciesOptions,
+  weightOptions,
+} from "@/constants/options";
 
 export default function ReportForm() {
-  const speciesOptions = ["모든 동물", "개", "고양이", "기타"];
-  const detailOptions = ["전체", "골든리트리버", "그레이하운드", "그레이트덴"];
-  const genderOptions = ["미확인", "암컷", "수컷"];
-  const ageOptions = ["나이 모름", "1년 미만", "1살", "2살", "3살"];
-  const weightOptions = [
-    "몸무게 모름",
-    "1kg 미만",
-    "1kg",
-    "2kg",
-    "3kg",
-    "4kg",
-    "5kg",
-  ];
-  const areaOptions = ["모든 지역", "경기도", "대구광역시", "대전광역시"];
   const [options, setOptions] = useState({
     gender: "미확인",
     species: "모든 동물",
@@ -80,13 +75,17 @@ export default function ReportForm() {
           selectValue={selectOption}
           value={options.species}
         />
-        <LabelAndSelectBar
-          title="품종"
-          name="detail"
-          options={detailOptions}
-          selectValue={selectOption}
-          value={options.detail}
-        />
+        {(options.species === "개" || options.species === "고양이") && (
+          <LabelAndSelectBar
+            title="품종"
+            name="detail"
+            options={
+              options.species === "개" ? detailDogOptions : detailCatOptions
+            }
+            selectValue={selectOption}
+            value={options.detail}
+          />
+        )}
       </div>
       <LabelAndSelectBar
         title="성별"

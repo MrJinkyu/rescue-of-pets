@@ -8,12 +8,15 @@ import SubmitButton from "@/components/common/submit-button";
 import { useState } from "react";
 import InputText from "../common/input-text";
 import Textarea from "../common/textarea";
+import {
+  areaOptions,
+  detailCatOptions,
+  detailDogOptions,
+  genderOptions,
+  speciesOptions,
+} from "@/constants/options";
 
 export default function TemporaryProtectionForm() {
-  const genderOptions = ["미확인", "암컷", "수컷"];
-  const speciesOptions = ["모든 동물", "개", "고양이", "기타"];
-  const detailOptions = ["전체", "골든리트리버", "그레이하운드", "그레이트덴"];
-  const areaOptions = ["모든 지역", "경기도", "대구광역시", "대전광역시"];
   const [options, setOptions] = useState({
     gender: "미확인",
     species: "모든 동물",
@@ -75,13 +78,17 @@ export default function TemporaryProtectionForm() {
           selectValue={selectOption}
           value={options.species}
         />
-        <LabelAndSelectBar
-          title="품종"
-          name="detail"
-          options={detailOptions}
-          selectValue={selectOption}
-          value={options.detail}
-        />
+        {(options.species === "개" || options.species === "고양이") && (
+          <LabelAndSelectBar
+            title="품종"
+            name="detail"
+            options={
+              options.species === "개" ? detailDogOptions : detailCatOptions
+            }
+            selectValue={selectOption}
+            value={options.detail}
+          />
+        )}
       </div>
       <LabelAndSelectBar
         title="지역"
