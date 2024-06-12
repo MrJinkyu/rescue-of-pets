@@ -7,7 +7,6 @@ interface StoryListProps {
     createdAt: Date;
     title: string;
     contents: string | null;
-    view: number;
     photo: string;
     user: {
       username: string;

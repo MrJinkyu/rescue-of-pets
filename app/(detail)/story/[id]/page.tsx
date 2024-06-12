@@ -1,12 +1,16 @@
 import { notFound } from "next/navigation";
-import { getIsLiked, getStory } from "./action";
+import { getCachedLikeStatus, getCachedStory, getStory } from "./action";
 import DetailTopBar from "@/components/common/detail-top-bar";
 import { getSession } from "@/session/getSession";
 import ProfileBar from "@/components/common/profile-bar";
 import Image from "next/image";
 import prismaDB from "@/database/db";
-import { revalidatePath } from "next/cache";
-import { HeartIcon } from "@heroicons/react/24/solid";
+import { revalidateTag } from "next/cache";
+import { HeartIcon as SolidHeartIcon } from "@heroicons/react/24/solid";
+import {
+  ChatBubbleBottomCenterIcon,
+  HeartIcon as OutlineHeartIcon,
+} from "@heroicons/react/24/outline";
 
 export default async function StoryDetail({
   params,
@@ -17,7 +21,7 @@ export default async function StoryDetail({
   if (isNaN(id)) {
     notFound();
   }
-  const story = await getStory(id);
+  const story = await getCachedStory(id);
   if (!story) {
     notFound();
   }
@@ -32,7 +36,7 @@ export default async function StoryDetail({
           userId: session.id!,
         },
       });
-      revalidatePath(`/story/${id}`);
+      revalidateTag(`story-liked-${id}`);
     } catch (e) {}
   }
 
@@ -48,7 +52,7 @@ export default async function StoryDetail({
           },
         },
       });
-      revalidatePath(`/story/${id}`);
+      revalidateTag(`story-liked-${id}`);
     } catch (e) {}
   }
 
@@ -59,12 +63,11 @@ export default async function StoryDetail({
     photo,
     title,
     contents,
-    view,
     _count: { likes, comments },
   } = story;
   const user = await getSession();
   const isOwner = userId === user.id;
-  const isLiked = await getIsLiked(id);
+  const { isLiked, likeCount } = await getCachedLikeStatus(id, user.id!);
   return (
     <section>
       <DetailTopBar isOwner={isOwner} id={story.id} category="report" />
@@ -75,9 +78,8 @@ export default async function StoryDetail({
             {title}
           </h3>
           <div className="px-4 flex items-center gap-2 *:text-sm *:text-neutral-500 *:font-medium">
-            <span>좋아요 {likes}</span>
+            <span>좋아요 {likeCount}</span>
             <span>댓글 {comments}</span>
-            <span>조회수 {view}</span>
           </div>
         </div>
         <div className="text-sm py-8 px-4">{contents}</div>
@@ -85,13 +87,23 @@ export default async function StoryDetail({
       <div className="relative aspect-square">
         <Image src={photo} alt="반려동물 사진" fill className="object-cover" />
       </div>
-      <form className="p-4" action={isLiked ? disLikeStory : likeStory}>
-        <button
-          className={`w-full ${isLiked ? "text-red-400" : "text-neutral-300"}`}
+      <div className="flex items-center">
+        <form
+          className="p-4 flex items-center"
+          action={isLiked ? disLikeStory : likeStory}
         >
-          <HeartIcon className="size-6" />
-        </button>
-      </form>
+          <button
+            className={`w-full ${isLiked ? "text-red-400" : "text-black"}`}
+          >
+            {isLiked ? (
+              <SolidHeartIcon className="size-6" />
+            ) : (
+              <OutlineHeartIcon className="size-6" />
+            )}
+          </button>
+        </form>
+        <ChatBubbleBottomCenterIcon className="size-6" />
+      </div>
     </section>
   );
 }

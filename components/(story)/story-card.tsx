@@ -8,7 +8,6 @@ interface StoryCardProps {
   createdAt: Date;
   title: string;
   contents: string | null;
-  view: number;
   photo: string;
   user: {
     username: string;
@@ -25,7 +24,6 @@ export default function StoryCard({
   createdAt,
   title,
   contents,
-  view,
   photo,
   user: { username, avatar },
   _count: { comments, likes },
@@ -61,7 +59,6 @@ export default function StoryCard({
         <div className="flex items-center gap-2 *:text-sm *:text-neutral-500 *:font-medium">
           <span>좋아요 {likes}</span>
           <span>댓글 {comments}</span>
-          <span>조회수 {view}</span>
         </div>
       </main>
     </Link>
