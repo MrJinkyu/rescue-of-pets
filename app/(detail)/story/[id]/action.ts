@@ -31,9 +31,9 @@ export async function getStory(storyId: number) {
 export async function getCachedStory(storyId: number) {
   const cached = unstable_cache(
     (storyId) => getStory(storyId),
-    ["story-detail"],
+    [`story-detail`],
     {
-      tags: ["story-detail"],
+      tags: [`story-detail`, `comment-list-${storyId}`],
       revalidate: 60,
     }
   );

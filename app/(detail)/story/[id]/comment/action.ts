@@ -2,11 +2,12 @@
 
 import prismaDB from "@/database/db";
 import { getSession } from "@/session/getSession";
+import { revalidateTag, unstable_cache } from "next/cache";
 
 export async function createComment(storyId: number, payload: string) {
   try {
     const session = await getSession();
-    const comment = await prismaDB.comment.create({
+    await prismaDB.comment.create({
       data: {
         storyId,
         userId: session.id!,
@@ -16,7 +17,7 @@ export async function createComment(storyId: number, payload: string) {
         payload: true,
       },
     });
-    return comment;
+    revalidateTag(`comment-list-${storyId}`);
   } catch (e) {}
 }
 
@@ -38,4 +39,15 @@ export async function getComments(storyId: number) {
     },
   });
   return comments;
+}
+
+export async function getCacheComments(storyId: number) {
+  const cachedComment = unstable_cache(
+    getComments,
+    [`comment-list-${storyId}`],
+    {
+      tags: [`comment-list-${storyId}`],
+    }
+  );
+  return cachedComment(storyId);
 }
