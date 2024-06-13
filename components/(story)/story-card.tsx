@@ -1,18 +1,17 @@
 import Link from "next/link";
 import ProfileBar from "../common/profile-bar";
 import Image from "next/image";
-import { link } from "fs";
 import {
   ChatBubbleBottomCenterIcon,
   HeartIcon,
 } from "@heroicons/react/24/outline";
 
 interface StoryCardProps {
+  title: string;
+  photo: string | null;
   id: number;
   createdAt: Date;
-  title: string;
-  contents: string | null;
-  photo: string;
+  contents: string;
   user: {
     username: string;
     avatar: string | null;
@@ -46,17 +45,21 @@ export default function StoryCard({
       <main className="w-full px-4 pb-3">
         <div className="w-full flex justify-between pb-2 gap-2">
           <div className="flex flex-col">
-            <h3 className="font-semibold text-md pb-2 line-clamp-1">{title}</h3>
+            <h3 className="font-semibold text-md mb-2 line-clamp-1">{title}</h3>
             <div className="text-sm line-clamp-2">{contents}</div>
           </div>
-          <div className="flex-shrink-0 relative size-28 rounded-sm overflow-hidden">
-            <Image
-              src={photo}
-              alt="반려동물 사진"
-              fill
-              className="object-cover"
-            />
-          </div>
+          {photo ? (
+            <div className="flex-shrink-0 relative size-28 rounded-sm overflow-hidden">
+              <Image
+                src={photo}
+                alt="반려동물 사진"
+                fill
+                className="object-cover"
+              />
+            </div>
+          ) : (
+            <div className="flex-shrink-0 size-28" />
+          )}
         </div>
         <div className="flex items-center gap-3 *:text-sm *:text-neutral-500 *:font-medium">
           <div className="flex items-center gap-1">

@@ -37,7 +37,7 @@ export default function SelectBar({
             return (
               <div
                 key={index}
-                className="text-lg font-semibold active:bg-neutral-100 w-full text-center py-1"
+                className="cursor-pointer hover:text-mainColor text-lg font-semibold active:bg-neutral-100 w-full text-center py-1"
                 onClick={() => selectOption(option)}
               >
                 {option}

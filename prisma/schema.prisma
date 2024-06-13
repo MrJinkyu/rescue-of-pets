@@ -86,11 +86,13 @@ model Story{
   updatedAt DateTime @updatedAt
 
   title String
-  contents String?
-  photo String
-  view Int @default(0)
+  contents String
+  photo String?
   comments Comment[]
   likes Like[]
+  species String
+  area String
+  category String
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int

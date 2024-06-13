@@ -49,30 +49,16 @@ export default async function StoryDetail({
         <div className="text-md py-10 mt-5 border-neutral-300 border-t">
           {contents}
         </div>
-        <div className="relative aspect-square">
-          <Image
-            src={photo}
-            alt="반려동물 사진"
-            fill
-            className="object-cover"
-          />
-        </div>
-        <div className="relative aspect-square">
-          <Image
-            src={photo}
-            alt="반려동물 사진"
-            fill
-            className="object-cover"
-          />
-        </div>
-        <div className="relative aspect-square">
-          <Image
-            src={photo}
-            alt="반려동물 사진"
-            fill
-            className="object-cover"
-          />
-        </div>
+        {photo && (
+          <div className="relative aspect-square">
+            <Image
+              src={photo}
+              alt="반려동물 사진"
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
       </div>
       <LikeAndComment
         isLiked={isLiked}

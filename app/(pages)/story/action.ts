@@ -8,7 +8,6 @@ export async function getInitStory() {
       id: true,
       title: true,
       contents: true,
-      view: true,
       createdAt: true,
       photo: true,
       _count: {

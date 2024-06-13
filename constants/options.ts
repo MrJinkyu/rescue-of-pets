@@ -177,3 +177,10 @@ export const areaOptions = [
   "부산광역시",
   "제주특별자치도",
 ];
+export const categoryOptions = [
+  "기타",
+  "입양해주세요",
+  "재회 성공담",
+  "일상 스토리",
+  "구조요청",
+];

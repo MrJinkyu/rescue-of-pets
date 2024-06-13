@@ -3,11 +3,11 @@ import StoryCard from "./story-card";
 
 interface StoryListProps {
   initList: {
+    title: string;
+    photo: string | null;
     id: number;
     createdAt: Date;
-    title: string;
-    contents: string | null;
-    photo: string;
+    contents: string;
     user: {
       username: string;
       avatar: string | null;

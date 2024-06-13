@@ -3,7 +3,6 @@
 import prismaDB from "@/database/db";
 import { getSession } from "@/session/getSession";
 import { revalidateTag, unstable_cache } from "next/cache";
-import { resolve } from "path";
 
 export async function getStory(storyId: number) {
   const story = await prismaDB.story.findUnique({
