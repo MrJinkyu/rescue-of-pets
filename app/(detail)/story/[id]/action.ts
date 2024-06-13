@@ -69,7 +69,6 @@ export async function getCachedLikeStatus(storyId: number, userId: number) {
 }
 
 export async function likeStory(storyId: number) {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
   try {
     const session = await getSession();
     await prismaDB.like.create({
@@ -95,4 +94,27 @@ export async function disLikeStory(storyId: number) {
     });
     revalidateTag(`story-liked-${storyId}`);
   } catch (e) {}
+}
+
+export async function getStoryComments(storyId: number) {
+  const story = await prismaDB.story.findMany({
+    where: {
+      id: storyId,
+    },
+    select: {
+      user: {
+        select: {
+          username: true,
+          avatar: true,
+        },
+      },
+      comments: {
+        select: {
+          payload: true,
+          createdAt: true,
+        },
+      },
+    },
+  });
+  return story;
 }

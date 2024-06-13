@@ -33,7 +33,7 @@ export default async function StoryDetail({
   const isOwner = userId === user.id;
   const { isLiked, likeCount } = await getCachedLikeStatus(id, user.id!);
   return (
-    <section>
+    <section className="pb-[56px]">
       <DetailTopBar isOwner={isOwner} id={story.id} category="report" />
       <div className="px-6">
         <h3 className="mt-[53px] pt-8 pb-4 w-full text-center font-semibold text-xl">
@@ -57,8 +57,29 @@ export default async function StoryDetail({
             className="object-cover"
           />
         </div>
-        <LikeAndComment isLiked={isLiked} likeCount={likeCount} storyId={id} />
+        <div className="relative aspect-square">
+          <Image
+            src={photo}
+            alt="반려동물 사진"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="relative aspect-square">
+          <Image
+            src={photo}
+            alt="반려동물 사진"
+            fill
+            className="object-cover"
+          />
+        </div>
       </div>
+      <LikeAndComment
+        isLiked={isLiked}
+        likeCount={likeCount}
+        storyId={id}
+        commentCount={comments}
+      />
     </section>
   );
 }
