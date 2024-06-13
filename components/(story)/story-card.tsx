@@ -2,6 +2,10 @@ import Link from "next/link";
 import ProfileBar from "../common/profile-bar";
 import Image from "next/image";
 import { link } from "fs";
+import {
+  ChatBubbleBottomCenterIcon,
+  HeartIcon,
+} from "@heroicons/react/24/outline";
 
 interface StoryCardProps {
   id: number;
@@ -31,7 +35,7 @@ export default function StoryCard({
   return (
     <Link
       href={`/story/${id}`}
-      className="bg-white w-full h-72 flex flex-col justify-center"
+      className="bg-white w-full h-60 flex flex-col justify-center cursor-pointer"
     >
       <ProfileBar
         avatar={avatar}
@@ -39,15 +43,13 @@ export default function StoryCard({
         createdAt={createdAt}
         isStory
       />
-      <main className="px-4 pb-3">
-        <h3 className="font-semibold text-md pb-3 overflow-hidden whitespace-nowrap truncate">
-          {title}
-        </h3>
-        <div className="text-sm overflow-hidden whitespace-nowrap truncate">
-          {contents}
-        </div>
-        <div className="flex items-center">
-          <div className="relative size-28 rounded-sm overflow-hidden my-3">
+      <main className="w-full px-4 pb-3">
+        <div className="w-full flex justify-between pb-2 gap-2">
+          <div className="flex flex-col">
+            <h3 className="font-semibold text-md pb-2 line-clamp-1">{title}</h3>
+            <div className="text-sm line-clamp-2">{contents}</div>
+          </div>
+          <div className="flex-shrink-0 relative size-28 rounded-sm overflow-hidden">
             <Image
               src={photo}
               alt="반려동물 사진"
@@ -56,9 +58,14 @@ export default function StoryCard({
             />
           </div>
         </div>
-        <div className="flex items-center gap-2 *:text-sm *:text-neutral-500 *:font-medium">
-          <span>좋아요 {likes}</span>
-          <span>댓글 {comments}</span>
+        <div className="flex items-center gap-3 *:text-sm *:text-neutral-500 *:font-medium">
+          <div className="flex items-center gap-1">
+            <HeartIcon className="size-6" /> <span>{likes}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <ChatBubbleBottomCenterIcon className="size-6" />{" "}
+            <span>{comments}</span>
+          </div>
         </div>
       </main>
     </Link>

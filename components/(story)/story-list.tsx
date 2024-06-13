@@ -21,7 +21,7 @@ interface StoryListProps {
 
 export default function StoryList({ initList }: StoryListProps) {
   return (
-    <div className="bg-neutral-100 flex flex-col gap-2">
+    <div className="bg-neutral-100 flex flex-col gap-1">
       {initList.map((post) => (
         <StoryCard key={post.id} {...post} />
       ))}

@@ -1,7 +1,9 @@
 "use server";
 
 import prismaDB from "@/database/db";
-import { unstable_cache } from "next/cache";
+import { getSession } from "@/session/getSession";
+import { revalidateTag, unstable_cache } from "next/cache";
+import { resolve } from "path";
 
 export async function getStory(storyId: number) {
   const story = await prismaDB.story.findUnique({
@@ -64,4 +66,33 @@ export async function getCachedLikeStatus(storyId: number, userId: number) {
     }
   );
   return cached(storyId, userId);
+}
+
+export async function likeStory(storyId: number) {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  try {
+    const session = await getSession();
+    await prismaDB.like.create({
+      data: {
+        storyId,
+        userId: session.id!,
+      },
+    });
+    revalidateTag(`story-liked-${storyId}`);
+  } catch (e) {}
+}
+
+export async function disLikeStory(storyId: number) {
+  try {
+    const session = await getSession();
+    await prismaDB.like.delete({
+      where: {
+        id: {
+          storyId,
+          userId: session.id!,
+        },
+      },
+    });
+    revalidateTag(`story-liked-${storyId}`);
+  } catch (e) {}
 }

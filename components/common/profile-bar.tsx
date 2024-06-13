@@ -7,6 +7,7 @@ interface ProfileBarProps {
   username: string;
   createdAt: Date;
   isStory?: boolean;
+  isColumn?: boolean;
 }
 
 export default function ProfileBar({
@@ -14,14 +15,15 @@ export default function ProfileBar({
   username,
   createdAt,
   isStory = false,
+  isColumn = false,
 }: ProfileBarProps) {
   return (
     <div
       className={`w-full px-4 py-3 flex justify-between  items-center ${
         isStory ? "" : "mt-[53px]"
-      }`}
+      } ${isColumn ? "flex-col gap-1" : ""}`}
     >
-      <div className="flex items-center gap-2">
+      <div className={`flex items-center gap-2 ${isColumn ? "flex-col" : ""}`}>
         {avatar ? (
           <div className="bg-neutral-300 rounded-full flex justify-center items-center size-8 overflow-hidden">
             <Image src={avatar} alt={username} width={30} height={30} />
@@ -31,7 +33,7 @@ export default function ProfileBar({
             <UserIcon className="size-6 text-white" />
           </div>
         )}
-        <span className="font-semibold">{username}</span>
+        <span className="font-medium">{username}</span>
       </div>
       <div className="text-neutral-400 text-sm">
         {formatTimeAgo(createdAt.toString())}
