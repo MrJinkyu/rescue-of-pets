@@ -22,7 +22,13 @@ export async function deletePost(id: number, category: string) {
       });
       redirect("/report");
     case "story":
-      break;
+      await prismaDB.story.delete({
+        where: {
+          id,
+        },
+        select: null,
+      });
+      redirect("/story");
     default:
       break;
   }

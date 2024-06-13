@@ -34,7 +34,7 @@ export default async function StoryDetail({
   const { isLiked, likeCount } = await getCachedLikeStatus(id, user.id!);
   return (
     <section className="pb-[56px]">
-      <DetailTopBar isOwner={isOwner} id={story.id} category="report" />
+      <DetailTopBar isOwner={isOwner} id={story.id} category="story" />
       <div className="px-6">
         <h3 className="mt-[53px] pt-8 pb-4 w-full text-center font-semibold text-xl">
           {title}

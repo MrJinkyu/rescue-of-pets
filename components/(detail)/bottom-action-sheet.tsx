@@ -22,12 +22,14 @@ export default function BottomActionSheet({
           <div className="flex items-center text-neutral-400 text-sm">
             작업을 선택하세요
           </div>
-          <form
-            action={() => updatePost(id, category)}
-            className="flex gap-2 items-center justify-center flex-1  cursor-pointer text-black font-semibold"
-          >
-            <button>완료로 수정하기</button>
-          </form>
+          {category !== "story" && (
+            <form
+              action={() => updatePost(id, category)}
+              className="flex gap-2 items-center justify-center flex-1  cursor-pointer text-black font-semibold"
+            >
+              <button>완료로 수정하기</button>
+            </form>
+          )}
           <form
             action={() => deletePost(id, category)}
             className="flex gap-2 items-center justify-center flex-1 cursor-pointer text-black font-semibold"
