@@ -17,7 +17,7 @@ export default function BottomActionSheet({
 }: BottomActionSheetProps) {
   return (
     <ModalOverlay cancelBottomActionSheet={cancelBottomActionSheet}>
-      <div className="fixed right-0 left-0 mx-auto bottom-0 max-w-screen-sm bg-white animate-fadeInUp">
+      <div className="fixed right-0 left-0 mx-auto bottom-0 max-w-screen-sm bg-white animate-fadeInUp z-30">
         <nav className="flex flex-col items-center p-4 gap-4">
           <div className="flex items-center text-neutral-400 text-sm">
             작업을 선택하세요

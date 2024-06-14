@@ -34,7 +34,7 @@ export default function StoryCard({
   return (
     <Link
       href={`/story/${id}`}
-      className="bg-white w-full h-60 flex flex-col justify-center cursor-pointer"
+      className="bg-white w-full h-60 flex flex-col justify-center cursor-pointer rounded-sm shadow-sm"
     >
       <ProfileBar
         avatar={avatar}

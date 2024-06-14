@@ -25,6 +25,8 @@ model User{
   storys Story[]
   comments Comment[]
   likes Like[]
+  chat_rooms ChatRoom[]
+  messages Message[]
 }
 
 model SMSToken{
@@ -120,6 +122,30 @@ model Like{
 
   story Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
   storyId Int
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+}
+
+model ChatRoom{
+  id String @id @default(cuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users User[]
+  messages Message[]
+}
+
+model Message{
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  payload String
+
+  room ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
+  chatRoomId String
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 }

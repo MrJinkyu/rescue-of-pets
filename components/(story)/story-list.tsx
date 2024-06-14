@@ -60,7 +60,7 @@ export default function StoryList({ initList }: StoryListProps) {
   }, [page]);
 
   return (
-    <div className="bg-neutral-100 flex flex-col gap-1">
+    <div className="bg-neutral-100 flex flex-col gap-4 p-4">
       {posts.map((post) => (
         <StoryCard key={post.id} {...post} />
       ))}

@@ -39,7 +39,7 @@ export default function LikeAndComment({
     }
   };
   return (
-    <div className="fixed bottom-0 w-full max-w-screen-sm mx-auto z-20 bg-white flex flex-col py-4">
+    <div className="fixed bottom-0 w-full max-w-screen-sm mx-auto z-10 bg-white flex flex-col py-4">
       <div className="flex items-center gap-3 px-6">
         <div className="flex items-center gap-1">
           <button
