@@ -3,6 +3,7 @@ import CommentTopBar from "@/components/common/comment-top-bar";
 import { notFound } from "next/navigation";
 import React from "react";
 import { getCacheComments } from "./action";
+import { getLoginUser } from "../action";
 
 export default async function StoryComment({
   params,
@@ -14,10 +15,15 @@ export default async function StoryComment({
     notFound();
   }
   const comments = await getCacheComments(id);
+  const loginUser = await getLoginUser();
   return (
     <section>
       <CommentTopBar />
-      <StoryCommentList commentList={comments} storyId={id} />
+      <StoryCommentList
+        commentList={comments}
+        storyId={id}
+        loginUser={loginUser!}
+      />
     </section>
   );
 }

@@ -117,3 +117,18 @@ export async function getStoryComments(storyId: number) {
   });
   return story;
 }
+
+export async function getLoginUser() {
+  const session = await getSession();
+  const user = await prismaDB.user.findUnique({
+    where: {
+      id: session.id,
+    },
+    select: {
+      id: true,
+      avatar: true,
+      username: true,
+    },
+  });
+  return user;
+}

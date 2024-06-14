@@ -1,28 +1,30 @@
 "use client";
 
-import { createComment } from "@/app/(detail)/story/[id]/comment/action";
 import { useState } from "react";
 
 interface StoryCommentFormProps {
-  storyId: number;
+  handleSubmit: (text: string) => void;
 }
 
-export default function StoryCommentForm({ storyId }: StoryCommentFormProps) {
+export default function StoryCommentForm({
+  handleSubmit,
+}: StoryCommentFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     setText(value);
   };
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsLoading(true);
 
     if (text.trim() === "") {
       setIsLoading(false);
       return;
     }
-    await createComment(storyId, text);
+
+    handleSubmit(text);
     setText("");
     setIsLoading(false);
   };
