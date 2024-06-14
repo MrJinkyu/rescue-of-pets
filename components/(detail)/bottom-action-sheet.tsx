@@ -5,7 +5,7 @@ import ModalOverlay from "../common/modal-overlay";
 import ModalCancelButton from "./modal-cancel-button";
 
 interface BottomActionSheetProps {
-  id: number;
+  id: number | string;
   category: "temporary-protection" | "report" | "story";
   cancelBottomActionSheet: () => void;
 }

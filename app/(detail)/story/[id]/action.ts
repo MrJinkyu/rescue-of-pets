@@ -118,11 +118,10 @@ export async function getStoryComments(storyId: number) {
   return story;
 }
 
-export async function getLoginUser() {
-  const session = await getSession();
+export async function getUserInfo(id: number) {
   const user = await prismaDB.user.findUnique({
     where: {
-      id: session.id,
+      id,
     },
     select: {
       id: true,

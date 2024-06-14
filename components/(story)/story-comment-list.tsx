@@ -2,8 +2,8 @@
 
 import { createComment } from "@/app/(detail)/story/[id]/comment/action";
 import StoryCommentCard from "./story-comment-card";
-import StoryCommentForm from "./story-comment-form";
 import { useOptimistic } from "react";
+import InputForm from "../common/input-form";
 
 export interface StoryComment {
   id: number;
@@ -52,7 +52,7 @@ export default function StoryCommentList({
   };
   return (
     <div className="mt-[53px] px-4">
-      <StoryCommentForm handleSubmit={handleSubmit} />
+      <InputForm handleSubmit={handleSubmit} />
       <div className="px-2 py-2">
         {state.map((comment) => (
           <StoryCommentCard key={comment.id} {...comment} />

@@ -2,13 +2,11 @@
 
 import { useState } from "react";
 
-interface StoryCommentFormProps {
+interface InputFormProps {
   handleSubmit: (text: string) => void;
 }
 
-export default function StoryCommentForm({
-  handleSubmit,
-}: StoryCommentFormProps) {
+export default function InputForm({ handleSubmit }: InputFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +29,6 @@ export default function StoryCommentForm({
   return (
     <form onSubmit={onSubmit} className="flex items-center gap-3">
       <input
-        placeholder="여기에 댓글을 입력하세요"
         name="payload"
         type="text"
         value={text}
