@@ -14,16 +14,17 @@ export default function StoryLoading() {
               </div>
               <div className="bg-neutral-400 rounded-md w-8 h-4" />
             </div>
-            <main className="px-4 pb-3">
-              <h3 className="mb-3 w-1/3 h-5 bg-neutral-400 rounded-sm"></h3>
-              <div className="w-2/3 h-4 bg-neutral-400 rounded-sm" />
-              <div className="flex items-center">
-                <div className="size-28 rounded-sm bg-neutral-400 my-3" />
+            <main className="w-full px-4 pb-3">
+              <div className="w-full flex justify-between pb-2 gap-2">
+                <div className="flex flex-col w-full">
+                  <h3 className="bg-neutral-400 w-2/3 h-5 mb-2 rounded-sm" />
+                  <div className="bg-neutral-400 w-11/12 h-10 rounded-sm" />
+                </div>
+                <div className="flex-shrink-0 size-28 bg-neutral-400 rounded-sm" />
               </div>
-              <div className="flex items-center gap-2">
-                <span className="w-10 h-5 rounded-sm bg-neutral-400" />
-                <span className="w-10 h-5 rounded-sm bg-neutral-400" />
-                <span className="w-10 h-5 rounded-sm bg-neutral-400" />
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1 size-6 bg-neutral-400 rounded-sm"></div>
+                <div className="flex items-center gap-1 size-6 bg-neutral-400 rounded-sm" />
               </div>
             </main>
           </div>
