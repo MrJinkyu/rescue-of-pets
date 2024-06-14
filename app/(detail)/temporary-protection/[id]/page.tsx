@@ -4,10 +4,11 @@ import Image from "next/image";
 import TemporaryProtectionIsActive from "@/components/(home)/temporary-protection-isActive";
 import TemporaryProtectionGender from "@/components/(home)/temporary-protection-gender";
 import TemporaryProtectionInfo from "@/components/(home)/temporary-protection-info";
-import SubmitButton from "@/components/common/submit-button";
 import DetailTopBar from "@/components/common/detail-top-bar";
 import { getSession } from "@/session/getSession";
 import ProfileBar from "@/components/common/profile-bar";
+import { createChatRoom } from "@/app/(chat)/action";
+import ChatButton from "@/components/common/chat-button";
 
 export default async function TemporaryProtectionDetail({
   params,
@@ -68,7 +69,7 @@ export default async function TemporaryProtectionDetail({
           </div>
         )}
       </div>
-      <SubmitButton text="입양문의" />
+      {!isOwner && <ChatButton text="입양문의" writerId={userId} />}
     </section>
   );
 }

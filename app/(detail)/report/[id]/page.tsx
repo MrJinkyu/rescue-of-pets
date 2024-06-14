@@ -6,7 +6,7 @@ import ProfileBar from "@/components/common/profile-bar";
 import Image from "next/image";
 import ReportIsActive from "@/components/(report)/report-isActive";
 import ReportInfo from "@/components/(report)/report-info";
-import SubmitButton from "@/components/common/submit-button";
+import ChatButton from "@/components/common/chat-button";
 
 export default async function ReportDetail({
   params,
@@ -71,7 +71,7 @@ export default async function ReportDetail({
           </div>
         )}
       </div>
-      <SubmitButton text="채팅하기" />
+      {!isOwner && <ChatButton text="채팅하기" writerId={userId} />}
     </section>
   );
 }

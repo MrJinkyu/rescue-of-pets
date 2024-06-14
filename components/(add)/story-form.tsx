@@ -4,7 +4,6 @@ import { useState } from "react";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { useFormState } from "react-dom";
 import SubmitButton from "../common/submit-button";
-import { createReport } from "@/app/(add)/report/new/action";
 import InputText from "../common/input-text";
 import Textarea from "../common/textarea";
 import LabelAndSelectBar from "../common/label-and-select-bar";

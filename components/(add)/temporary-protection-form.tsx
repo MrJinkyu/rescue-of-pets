@@ -4,7 +4,6 @@ import { PhotoIcon } from "@heroicons/react/24/solid";
 import LabelAndSelectBar from "@/components/common/label-and-select-bar";
 import { createTemporaryProtection } from "@/app/(add)/temporary-protection/new/action";
 import { useFormState } from "react-dom";
-import SubmitButton from "@/components/common/submit-button";
 import { useState } from "react";
 import InputText from "../common/input-text";
 import Textarea from "../common/textarea";
@@ -15,6 +14,7 @@ import {
   genderOptions,
   speciesOptions,
 } from "@/constants/options";
+import SubmitButton from "../common/submit-button";
 
 export default function TemporaryProtectionForm() {
   const [options, setOptions] = useState({
