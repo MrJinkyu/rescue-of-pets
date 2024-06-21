@@ -42,6 +42,8 @@ export default function ChatMessageList({
   const [isLastPage, setIsLastPage] = useState(false);
   const trigger = useRef<HTMLSpanElement>(null);
   const chatRoomRef = useRef<HTMLDivElement>(null);
+  const [scrollHeightBeforeFetching, setScrollHeightBeforeFetching] =
+    useState(0);
   const channel = useRef<RealtimeChannel>();
   const handleSubmit = (text: string) => {
     setMessages((prevMessages) => [
@@ -73,16 +75,19 @@ export default function ChatMessageList({
     });
     saveMessage(text, chatRoomId, loginUserInfo.id);
   };
+  // 채팅방 진입 시 스크롤 최하단
   useEffect(() => {
     if (chatRoomRef.current) {
       chatRoomRef.current.scrollTop = chatRoomRef.current.scrollHeight;
     }
   }, []);
+  // 새로운 메시지 생성 시 스크롤 최하단
   useEffect(() => {
     if (chatRoomRef.current) {
       chatRoomRef.current.scrollTop = chatRoomRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages.length]);
+  // 실시간 채팅
   useEffect(() => {
     const client = createClient(SUPABASE_URL, SUPABASE_API);
     channel.current = client.channel(`room-${chatRoomId}`);
@@ -95,6 +100,7 @@ export default function ChatMessageList({
       channel.current?.unsubscribe();
     };
   }, [chatRoomId]);
+  // 무한스크롤
   useEffect(() => {
     const observer = new IntersectionObserver(
       async (
@@ -105,6 +111,7 @@ export default function ChatMessageList({
         if (trigger.current && element.isIntersecting) {
           observer.unobserve(trigger.current);
           const nextMessages = await getMoreMessages(chatRoomId, page + 1);
+          setScrollHeightBeforeFetching(chatRoomRef.current?.scrollHeight ?? 0);
           const reverseNextMessages = nextMessages.reverse();
           if (nextMessages.length !== 0) {
             setMessages((prev) => [...reverseNextMessages, ...prev]);
@@ -125,6 +132,16 @@ export default function ChatMessageList({
       observer.disconnect();
     };
   }, [page, chatRoomId]);
+  // 무한스크롤 발생 시 스크롤 위치
+  useEffect(() => {
+    if (chatRoomRef.current && scrollHeightBeforeFetching !== 0) {
+      const currentScrollHeight = chatRoomRef.current.scrollHeight;
+      const newScrollPosition =
+        currentScrollHeight - scrollHeightBeforeFetching;
+      chatRoomRef.current.scrollTop = newScrollPosition;
+    }
+  }, [scrollHeightBeforeFetching, messages.length]);
+
   return (
     <section className="flex flex-col">
       <AddTopBar title={otherUserInfo.username} />
