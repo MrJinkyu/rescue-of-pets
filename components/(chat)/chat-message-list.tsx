@@ -6,7 +6,16 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import AddTopBar from "../common/add-top-bar";
 import InputForm from "../common/input-form";
+import { RealtimeChannel, createClient } from "@supabase/supabase-js";
+import { SUPABASE_API, SUPABASE_URL } from "@/constants/chat";
+
+interface UserInfo {
+  id: number;
+  username: string;
+  avatar: string | null;
+}
 interface ChatMessageListProps {
+  chatRoomId: string;
   initMessageList: {
     id: number;
     createdAt: Date;
@@ -17,25 +26,68 @@ interface ChatMessageListProps {
     payload: string;
     userId: number;
   }[];
-  loginUserId: number;
-  otherUserName: string;
+  loginUserInfo: UserInfo;
+  otherUserInfo: UserInfo;
 }
 
 export default function ChatMessageList({
+  chatRoomId,
   initMessageList,
-  loginUserId,
-  otherUserName,
+  loginUserInfo,
+  otherUserInfo,
 }: ChatMessageListProps) {
   const [messages, setMessages] = useState(initMessageList);
   const chatRoomRef = useRef<HTMLDivElement>(null);
+  const channel = useRef<RealtimeChannel>();
+  const handleSubmit = (text: string) => {
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      {
+        id: messages.length + 1,
+        payload: text,
+        createdAt: new Date(),
+        userId: loginUserInfo.id,
+        user: {
+          avatar: loginUserInfo.avatar,
+          username: loginUserInfo.username,
+        },
+      },
+    ]);
+    channel.current?.send({
+      type: "broadcast",
+      event: "message",
+      payload: {
+        id: messages.length + 1,
+        payload: text,
+        createdAt: new Date(),
+        userId: loginUserInfo.id,
+        user: {
+          avatar: loginUserInfo.avatar,
+          username: loginUserInfo.username,
+        },
+      },
+    });
+  };
   useEffect(() => {
     if (chatRoomRef.current) {
       chatRoomRef.current.scrollTop = chatRoomRef.current.scrollHeight;
     }
   }, []);
+  useEffect(() => {
+    const client = createClient(SUPABASE_URL, SUPABASE_API);
+    channel.current = client.channel(`room-${chatRoomId}`);
+    channel.current
+      .on("broadcast", { event: "message" }, (payload) => {
+        setMessages((prevMessages) => [...prevMessages, payload.payload]);
+      })
+      .subscribe();
+    return () => {
+      channel.current?.unsubscribe();
+    };
+  }, [chatRoomId]);
   return (
     <section className="flex flex-col">
-      <AddTopBar title={otherUserName} />
+      <AddTopBar title={otherUserInfo.username} />
       <main className="flex flex-col p-5 mt-[53px]">
         <div
           ref={chatRoomRef}
@@ -46,7 +98,7 @@ export default function ChatMessageList({
               <div
                 key={message.id}
                 className={`flex gap-2 items-start ${
-                  loginUserId === message.userId
+                  loginUserInfo.id === message.userId
                     ? "justify-end"
                     : "justify-start"
                 }`}
@@ -54,7 +106,7 @@ export default function ChatMessageList({
                 {message.user.avatar ? (
                   <div
                     className={`bg-neutral-300 rounded-full flex justify-center items-center size-8 overflow-hidden ${
-                      loginUserId === message.userId ? "hidden" : ""
+                      loginUserInfo.id === message.userId ? "hidden" : ""
                     }`}
                   >
                     <Image
@@ -67,7 +119,7 @@ export default function ChatMessageList({
                 ) : (
                   <div
                     className={`bg-neutral-300 rounded-full flex justify-center items-end size-8 ${
-                      loginUserId === message.userId ? "hidden" : ""
+                      loginUserInfo.id === message.userId ? "hidden" : ""
                     }`}
                   >
                     <UserIcon className="size-6 text-white" />
@@ -75,12 +127,14 @@ export default function ChatMessageList({
                 )}
                 <div
                   className={`flex items-end gap-2 ${
-                    loginUserId === message.userId ? "flex-row-reverse" : ""
+                    loginUserInfo.id === message.userId
+                      ? "flex-row-reverse"
+                      : ""
                   }`}
                 >
                   <span
                     className={`${
-                      loginUserId === message.userId
+                      loginUserInfo.id === message.userId
                         ? "bg-neutral-100"
                         : "bg-sky-100"
                     } px-3 py-2 rounded-md`}
@@ -95,7 +149,7 @@ export default function ChatMessageList({
             );
           })}
         </div>
-        <InputForm handleSubmit={() => {}} />
+        <InputForm handleSubmit={handleSubmit} />
       </main>
     </section>
   );

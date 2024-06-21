@@ -19,11 +19,13 @@ export default async function ChatDetail({
   const loginUserId = session.id!;
   const otherUser = room.users.find((user) => user.id !== loginUserId)!;
   const otherUserInfo = await getUserInfo(otherUser.id);
+  const loginUserInfo = await getUserInfo(loginUserId);
   return (
     <ChatMessageList
+      chatRoomId={room.id}
       initMessageList={initMessageList}
-      loginUserId={loginUserId}
-      otherUserName={otherUserInfo?.username!}
+      loginUserInfo={loginUserInfo!}
+      otherUserInfo={otherUserInfo!}
     />
   );
 }

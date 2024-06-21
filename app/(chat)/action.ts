@@ -68,7 +68,7 @@ export async function getInitMessages(chatRoomId: string) {
         },
       },
     },
-    take: 10,
+    take: 20,
   });
   return messages;
 }
