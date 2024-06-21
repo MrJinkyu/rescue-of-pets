@@ -21,7 +21,7 @@ export default function ChatRoomList({
   return (
     <Link
       href={`/chat/${id}`}
-      className="w-full p-4  flex items-center border-b border-neutral-200 text-black last:border-b-0 hover:bg-neutral-50 transition-colors"
+      className="w-full h-[81px] p-4  flex items-center border-b border-neutral-200 text-black last:border-b-0 hover:bg-neutral-50 transition-colors"
     >
       <div className="mr-4">
         {avatar ? (
@@ -41,7 +41,7 @@ export default function ChatRoomList({
             {formatTimeAgo(createdAt.toString())}
           </span>
         </div>
-        <div className="text-md">{lastMessage}</div>
+        <div className="text-md line-clamp-1">{lastMessage}</div>
       </div>
     </Link>
   );

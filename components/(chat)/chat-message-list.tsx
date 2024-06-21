@@ -163,7 +163,7 @@ export default function ChatMessageList({
               >
                 {message.user.avatar ? (
                   <div
-                    className={`bg-neutral-300 rounded-full flex justify-center items-center size-8 overflow-hidden ${
+                    className={`bg-neutral-300 rounded-full flex justify-center flex-shrink-0 items-center size-8 overflow-hidden ${
                       loginUserInfo.id === message.userId ? "hidden" : ""
                     }`}
                   >
@@ -176,7 +176,7 @@ export default function ChatMessageList({
                   </div>
                 ) : (
                   <div
-                    className={`bg-neutral-300 rounded-full flex justify-center items-end size-8 ${
+                    className={`bg-neutral-300 rounded-full flex justify-center flex-shrink-0 items-end size-8 ${
                       loginUserInfo.id === message.userId ? "hidden" : ""
                     }`}
                   >
@@ -199,7 +199,7 @@ export default function ChatMessageList({
                   >
                     {message.payload}
                   </span>
-                  <span className="text-xs">
+                  <span className="text-xs flex-shrink-0">
                     {formatTimeAgo(message.createdAt.toString())}
                   </span>
                 </div>
