@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       height: {
-        "screen-minus-133": "calc(100vh - 133px)",
+        "chat-screen": "calc(100vh - 113px)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

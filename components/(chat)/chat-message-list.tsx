@@ -76,6 +76,11 @@ export default function ChatMessageList({
     }
   }, []);
   useEffect(() => {
+    if (chatRoomRef.current) {
+      chatRoomRef.current.scrollTop = chatRoomRef.current.scrollHeight;
+    }
+  }, [messages]);
+  useEffect(() => {
     const client = createClient(SUPABASE_URL, SUPABASE_API);
     channel.current = client.channel(`room-${chatRoomId}`);
     channel.current
@@ -90,16 +95,16 @@ export default function ChatMessageList({
   return (
     <section className="flex flex-col">
       <AddTopBar title={otherUserInfo.username} />
-      <main className="flex flex-col p-5 mt-[53px]">
+      <main className="flex flex-col mt-[53px]">
         <div
           ref={chatRoomRef}
-          className="h-screen-minus-133 flex flex-col justify-end pb-5 gap-5 flex-grow overflow-y-auto bg-white"
+          className="h-chat-screen flex flex-col pb-5 gap-5 flex-grow overflow-y-auto bg-white"
         >
           {messages.map((message) => {
             return (
               <div
                 key={message.id}
-                className={`flex gap-2 items-start ${
+                className={`flex gap-2 items-start px-5 first-of-type:pt-5 ${
                   loginUserInfo.id === message.userId
                     ? "justify-end"
                     : "justify-start"
@@ -151,7 +156,9 @@ export default function ChatMessageList({
             );
           })}
         </div>
-        <InputForm handleSubmit={handleSubmit} />
+        <div className="px-5">
+          <InputForm handleSubmit={handleSubmit} />
+        </div>
       </main>
     </section>
   );
