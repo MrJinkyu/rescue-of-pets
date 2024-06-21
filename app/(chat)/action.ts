@@ -72,3 +72,20 @@ export async function getInitMessages(chatRoomId: string) {
   });
   return messages;
 }
+
+export async function saveMessage(
+  payload: string,
+  chatRoomId: string,
+  userId: number
+) {
+  await prismaDB.message.create({
+    data: {
+      payload,
+      chatRoomId,
+      userId,
+    },
+    select: {
+      id: true,
+    },
+  });
+}

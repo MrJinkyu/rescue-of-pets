@@ -8,6 +8,7 @@ import AddTopBar from "../common/add-top-bar";
 import InputForm from "../common/input-form";
 import { RealtimeChannel, createClient } from "@supabase/supabase-js";
 import { SUPABASE_API, SUPABASE_URL } from "@/constants/chat";
+import { saveMessage } from "@/app/(chat)/action";
 
 interface UserInfo {
   id: number;
@@ -67,6 +68,7 @@ export default function ChatMessageList({
         },
       },
     });
+    saveMessage(text, chatRoomId, loginUserInfo.id);
   };
   useEffect(() => {
     if (chatRoomRef.current) {
