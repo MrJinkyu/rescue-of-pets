@@ -35,6 +35,9 @@ export async function getChatRoomList(userId: number) {
       },
       createdAt: true,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return chatRoomList;
 }

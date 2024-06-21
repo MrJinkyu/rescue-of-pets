@@ -7,25 +7,50 @@ import { redirect } from "next/navigation";
 export async function createChatRoom(writerId: number) {
   const session = await getSession();
   const loginUserId = session.id!;
-
-  const room = await prismaDB.chatRoom.create({
-    data: {
-      users: {
-        connect: [
-          {
-            id: writerId,
+  const existingRoom = await prismaDB.chatRoom.findFirst({
+    where: {
+      AND: [
+        {
+          users: {
+            some: {
+              id: writerId,
+            },
           },
-          {
-            id: loginUserId,
+        },
+        {
+          users: {
+            some: {
+              id: loginUserId,
+            },
           },
-        ],
-      },
+        },
+      ],
     },
     select: {
       id: true,
     },
   });
-  redirect(`/chat/${room.id}`);
+  if (!existingRoom) {
+    const room = await prismaDB.chatRoom.create({
+      data: {
+        users: {
+          connect: [
+            {
+              id: writerId,
+            },
+            {
+              id: loginUserId,
+            },
+          ],
+        },
+      },
+      select: {
+        id: true,
+      },
+    });
+    redirect(`/chat/${room.id}`);
+  }
+  redirect(`/chat/${existingRoom.id}`);
 }
 
 export async function getChatRoom(roomId: string) {
