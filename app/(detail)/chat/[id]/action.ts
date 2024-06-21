@@ -93,7 +93,36 @@ export async function getInitMessages(chatRoomId: string) {
         },
       },
     },
-    take: 20,
+    take: 15,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return messages;
+}
+
+export async function getMoreMessages(chatRoomId: string, page: number) {
+  const messages = await prismaDB.message.findMany({
+    where: {
+      chatRoomId,
+    },
+    select: {
+      id: true,
+      payload: true,
+      createdAt: true,
+      userId: true,
+      user: {
+        select: {
+          avatar: true,
+          username: true,
+        },
+      },
+    },
+    skip: 15 * page,
+    take: 15,
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return messages;
 }

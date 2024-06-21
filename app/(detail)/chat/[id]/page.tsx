@@ -23,7 +23,7 @@ export default async function ChatDetail({
   return (
     <ChatMessageList
       chatRoomId={room.id}
-      initMessageList={initMessageList}
+      initMessageList={initMessageList.reverse()}
       loginUserInfo={loginUserInfo!}
       otherUserInfo={otherUserInfo!}
     />

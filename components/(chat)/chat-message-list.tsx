@@ -8,7 +8,7 @@ import AddTopBar from "../common/add-top-bar";
 import InputForm from "../common/input-form";
 import { RealtimeChannel, createClient } from "@supabase/supabase-js";
 import { SUPABASE_API, SUPABASE_URL } from "@/constants/chat";
-import { saveMessage } from "@/app/(detail)/chat/[id]/action";
+import { getMoreMessages, saveMessage } from "@/app/(detail)/chat/[id]/action";
 
 export interface UserInfo {
   id: number;
@@ -38,6 +38,9 @@ export default function ChatMessageList({
   otherUserInfo,
 }: ChatMessageListProps) {
   const [messages, setMessages] = useState(initMessageList);
+  const [page, setPage] = useState(0);
+  const [isLastPage, setIsLastPage] = useState(false);
+  const trigger = useRef<HTMLSpanElement>(null);
   const chatRoomRef = useRef<HTMLDivElement>(null);
   const channel = useRef<RealtimeChannel>();
   const handleSubmit = (text: string) => {
@@ -92,14 +95,45 @@ export default function ChatMessageList({
       channel.current?.unsubscribe();
     };
   }, [chatRoomId]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      async (
+        entries: IntersectionObserverEntry[],
+        observer: IntersectionObserver
+      ) => {
+        const element = entries[0];
+        if (trigger.current && element.isIntersecting) {
+          observer.unobserve(trigger.current);
+          const nextMessages = await getMoreMessages(chatRoomId, page + 1);
+          const reverseNextMessages = nextMessages.reverse();
+          if (nextMessages.length !== 0) {
+            setMessages((prev) => [...reverseNextMessages, ...prev]);
+            setPage((prev) => prev + 1);
+          } else {
+            setIsLastPage(true);
+          }
+        }
+      },
+      {
+        rootMargin: "53px 0px 0px 0px",
+      }
+    );
+    if (trigger.current) {
+      observer.observe(trigger.current);
+    }
+    return () => {
+      observer.disconnect();
+    };
+  }, [page, chatRoomId]);
   return (
     <section className="flex flex-col">
       <AddTopBar title={otherUserInfo.username} />
-      <main className="flex flex-col mt-[53px]">
+      <main className="flex flex-col pt-[53px]">
         <div
           ref={chatRoomRef}
           className="h-chat-screen flex flex-col pb-5 gap-5 flex-grow overflow-y-auto bg-white"
         >
+          {!isLastPage && <span ref={trigger} className="w-full h-0" />}
           {messages.map((message) => {
             return (
               <div
