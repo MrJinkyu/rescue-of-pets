@@ -1,8 +1,8 @@
-import { getChatRoom, getInitMessages } from "@/app/(chat)/action";
-import ChatMessageList from "@/components/(chat)/chat-message-list";
 import { getSession } from "@/session/getSession";
 import { notFound } from "next/navigation";
 import { getUserInfo } from "../../story/[id]/action";
+import { getChatRoom, getInitMessages } from "./action";
+import ChatMessageList from "@/components/(chat)/chat-message-list";
 
 export default async function ChatDetail({
   params,

@@ -8,9 +8,9 @@ import AddTopBar from "../common/add-top-bar";
 import InputForm from "../common/input-form";
 import { RealtimeChannel, createClient } from "@supabase/supabase-js";
 import { SUPABASE_API, SUPABASE_URL } from "@/constants/chat";
-import { saveMessage } from "@/app/(chat)/action";
+import { saveMessage } from "@/app/(detail)/chat/[id]/action";
 
-interface UserInfo {
+export interface UserInfo {
   id: number;
   username: string;
   avatar: string | null;

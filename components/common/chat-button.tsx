@@ -1,6 +1,6 @@
 "use client";
 
-import { createChatRoom } from "@/app/(chat)/action";
+import { createChatRoom } from "@/app/(detail)/chat/[id]/action";
 import { useFormStatus } from "react-dom";
 
 interface ChatButtonProps {
