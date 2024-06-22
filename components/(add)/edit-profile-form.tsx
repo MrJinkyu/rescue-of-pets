@@ -1,8 +1,10 @@
 "use client";
+
 import { UserIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputText from "../common/input-text";
-import SubmitButton from "../common/submit-button";
+import { useFormState } from "react-dom";
+import { editProfile } from "@/app/(add)/profile-edit/action";
 
 interface EditProfileFormProps {
   id: number;
@@ -25,8 +27,9 @@ export default function EditProfileForm({
     const url = URL.createObjectURL(files[0]);
     setPreview(url);
   };
+  const [state, dispatch] = useFormState(editProfile, null);
   return (
-    <form className="flex flex-col gap-6 p-6">
+    <form action={dispatch} className="flex flex-col gap-6 p-6">
       <div className="text-center mx-auto">
         <input
           type="file"
@@ -48,9 +51,16 @@ export default function EditProfileForm({
           )}
         </label>
       </div>
-      <InputText name="닉네임" title="닉네임" placeholder={username} isColumn />
       <InputText
-        name="이메일"
+        name="username"
+        title="닉네임"
+        defaultValue={username}
+        required
+        isColumn
+        errors={state?.fieldErrors.username}
+      />
+      <InputText
+        name="email"
         title="이메일"
         placeholder={email}
         isColumn

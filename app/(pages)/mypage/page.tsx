@@ -36,7 +36,7 @@ export default async function MyPage() {
           </div>
           <Link
             href="/profile-edit"
-            className="w-1/3 flex-shrink-0 text-center font-semibold px-4 py-2 border border-neutral-500 rounded-md"
+            className="w-1/3 flex-shrink-0 text-center font-semibold px-4 py-2 border border-neutral-400 rounded-md"
           >
             프로필 편집
           </Link>

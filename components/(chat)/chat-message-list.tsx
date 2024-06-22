@@ -140,7 +140,7 @@ export default function ChatMessageList({
         currentScrollHeight - scrollHeightBeforeFetching;
       chatRoomRef.current.scrollTop = newScrollPosition;
     }
-  }, [scrollHeightBeforeFetching, messages.length]);
+  }, [scrollHeightBeforeFetching, page]);
 
   return (
     <section className="flex flex-col">
