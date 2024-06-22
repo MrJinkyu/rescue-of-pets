@@ -7,7 +7,6 @@ import TemporaryProtectionInfo from "@/components/(home)/temporary-protection-in
 import DetailTopBar from "@/components/common/detail-top-bar";
 import { getSession } from "@/session/getSession";
 import ProfileBar from "@/components/common/profile-bar";
-import { createChatRoom } from "@/app/(chat)/action";
 import ChatButton from "@/components/common/chat-button";
 
 export default async function TemporaryProtectionDetail({
