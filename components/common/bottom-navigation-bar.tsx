@@ -77,8 +77,8 @@ export default function BottomNavigationBar() {
           채팅
         </span>
       </Link>
-      <Link href="/profile" className="flex flex-col items-center">
-        {pathname === "/profile" ? (
+      <Link href="/mypage" className="flex flex-col items-center">
+        {pathname === "/mypage" ? (
           <SolidUserIcon className="size-7 text-mainColor" />
         ) : (
           <OutlineUserIcon className="size-7 text-neutral-500" />

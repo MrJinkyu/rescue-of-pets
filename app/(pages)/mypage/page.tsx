@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ChevronRightIcon, UserIcon } from "@heroicons/react/24/solid";
 import { getUserInfo } from "@/app/(detail)/story/[id]/action";
 import { getSession } from "@/session/getSession";
+import Link from "next/link";
 
 export default async function MyPage() {
   const session = await getSession();
@@ -33,9 +34,12 @@ export default async function MyPage() {
               {userInfo?.email}
             </p>
           </div>
-          <button className="w-1/3 flex-shrink-0 font-semibold px-4 py-2 border border-neutral-500 rounded-md">
+          <Link
+            href="/profile-edit"
+            className="w-1/3 flex-shrink-0 text-center font-semibold px-4 py-2 border border-neutral-500 rounded-md"
+          >
             프로필 편집
-          </button>
+          </Link>
         </div>
       </article>
       <article className="px-6 pt-10 md:px-12">
