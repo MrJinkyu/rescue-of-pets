@@ -1,15 +1,23 @@
 import Image from "next/image";
 import { ChevronRightIcon, UserIcon } from "@heroicons/react/24/solid";
+import { getUserInfo } from "@/app/(detail)/story/[id]/action";
+import { getSession } from "@/session/getSession";
 
-export default function Profile() {
-  const avatar = null;
-  const username = "";
+export default async function MyPage() {
+  const session = await getSession();
+  const loginUserId = session.id!;
+  const userInfo = await getUserInfo(loginUserId);
   return (
     <section className="flex flex-col">
       <article className="bg-neutral-50 aspect-video flex flex-col justify-center items-center gap-4">
-        {avatar ? (
+        {userInfo?.avatar ? (
           <div className="bg-neutral-300 rounded-full flex justify-center items-center size-24 overflow-hidden">
-            <Image src={avatar} alt={username} width={96} height={96} />
+            <Image
+              src={userInfo.avatar}
+              alt={userInfo.username}
+              width={96}
+              height={96}
+            />
           </div>
         ) : (
           <div className="bg-neutral-300 rounded-full flex justify-center items-end size-24">
@@ -19,10 +27,10 @@ export default function Profile() {
         <div className="w-full flex justify-between items-center px-6 gap-2 md:flex-col">
           <div className="flex flex-col w-2/3 md:w-full md:items-center md:pb-4">
             <p className="font-semibold overflow-hidden whitespace-nowrap truncate">
-              성남뭉치아빠김돌이
+              {userInfo?.username}
             </p>
             <p className="text-neutral-500 text-sm overflow-hidden whitespace-nowrap truncate">
-              rlawlsrb16736@gmail.com
+              {userInfo?.email}
             </p>
           </div>
           <button className="w-1/3 flex-shrink-0 font-semibold px-4 py-2 border border-neutral-500 rounded-md">
@@ -32,7 +40,7 @@ export default function Profile() {
       </article>
       <article className="px-6 pt-10 md:px-12">
         <div className="text-center pb-2 font-semibold text-neutral-400">
-          마이메뉴
+          내 게시물
         </div>
         <ul className="pb-4  flex flex-col gap-2 *:border-b cursor-pointer">
           <li className="flex items-center justify-between py-2">

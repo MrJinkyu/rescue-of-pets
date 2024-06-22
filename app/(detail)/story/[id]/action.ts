@@ -127,6 +127,7 @@ export async function getUserInfo(id: number) {
       id: true,
       avatar: true,
       username: true,
+      email: true,
     },
   });
   return user;
