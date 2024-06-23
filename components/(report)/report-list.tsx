@@ -1,6 +1,6 @@
 "use client";
 
-import { getMoreReports } from "@/app/(pages)/report/action";
+import { getMoreMyReports } from "@/app/(pages)/report/action";
 import ReportCard from "./report-card";
 import { useEffect, useRef, useState } from "react";
 
@@ -35,7 +35,7 @@ export default function ReportList({ initList }: ReportListProps) {
         const element = entries[0];
         if (trigger.current && element.isIntersecting) {
           observer.unobserve(trigger.current);
-          const nextPosts = await getMoreReports(page + 1);
+          const nextPosts = await getMoreMyReports(page + 1);
           if (nextPosts.length !== 0) {
             setPosts((prev) => [...prev, ...nextPosts]);
             setPage((prev) => prev + 1);

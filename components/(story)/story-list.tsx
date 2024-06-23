@@ -20,13 +20,9 @@ interface StoryListProps {
       likes: number;
     };
   }[];
-  isMyStory?: boolean;
 }
 
-export default function StoryList({
-  initList,
-  isMyStory = false,
-}: StoryListProps) {
+export default function StoryList({ initList }: StoryListProps) {
   const [posts, setPosts] = useState(initList);
   const [page, setPage] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);

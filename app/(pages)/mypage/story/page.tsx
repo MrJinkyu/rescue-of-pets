@@ -8,7 +8,7 @@ export default async function MyStory() {
   return (
     <section className="w-full">
       <AddTopBar title="내 스토리" />
-      <StoryList initList={myStorys} isMyStory />
+      <StoryList initList={myStorys} />
     </section>
   );
 }

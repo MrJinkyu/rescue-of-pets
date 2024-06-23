@@ -46,15 +46,18 @@ export default async function MyPage() {
         <div className="text-center pb-2 font-semibold text-neutral-400">
           내 게시물
         </div>
-        <ul className="pb-4  flex flex-col gap-2 *:border-b cursor-pointer">
+        <div className="pb-4  flex flex-col gap-2 *:border-b cursor-pointer">
           <li className="flex items-center justify-between py-2">
             <span>임시보호</span>
             <ChevronRightIcon className="size-6" />
           </li>
-          <li className="flex items-center justify-between py-2">
+          <Link
+            href="/mypage/report"
+            className="flex items-center justify-between py-2"
+          >
             <span>실종신고</span>
             <ChevronRightIcon className="size-6" />
-          </li>
+          </Link>
           <Link
             href="/mypage/story"
             className="flex items-center justify-between py-2"
@@ -62,7 +65,7 @@ export default async function MyPage() {
             <span>스토리</span>
             <ChevronRightIcon className="size-6" />
           </Link>
-        </ul>
+        </div>
       </article>
     </section>
   );
