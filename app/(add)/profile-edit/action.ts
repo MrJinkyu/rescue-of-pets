@@ -49,6 +49,7 @@ function isValidFile(file: File) {
 }
 
 export async function editProfile(_: any, formData: FormData) {
+  console.log("편집 실행됌");
   const data = {
     username: formData.get("username"),
     photo: formData.get("photo"),
@@ -73,4 +74,15 @@ export async function editProfile(_: any, formData: FormData) {
     }
     redirect("/mypage");
   }
+}
+
+export async function deleteUser() {
+  const session = await getSession();
+  const userId = session.id!;
+  await prismaDB.user.delete({
+    where: {
+      id: userId,
+    },
+  });
+  redirect("/login");
 }

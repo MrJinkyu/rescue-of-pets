@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import InputText from "../common/input-text";
 import { useFormState } from "react-dom";
 import { editProfile } from "@/app/(add)/profile-edit/action";
+import LogoutButton from "../(mypage)/logout-button";
 
 interface EditProfileFormProps {
   id: number;
@@ -69,11 +70,6 @@ export default function EditProfileForm({
       <button className="w-full my-6 h-12 bg-mainColor rounded-sm text-white font-semibold text-lg active:opacity-80">
         저장하기
       </button>
-      <div className="fixed bottom-6 left-0 right-0 mx-auto w-full max-w-screen-sm pr-6 flex items-center justify-end *:text-neutral-500">
-        <button type="button">로그아웃</button>
-        <span className="mx-4">|</span>
-        <button type="button">회원탈퇴</button>
-      </div>
     </form>
   );
 }
