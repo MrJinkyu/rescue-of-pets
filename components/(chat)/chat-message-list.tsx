@@ -23,12 +23,12 @@ interface ChatMessageListProps {
     user: {
       username: string;
       avatar: string | null;
-    };
+    } | null;
     payload: string;
-    userId: number;
+    userId: number | null;
   }[];
   loginUserInfo: UserInfo;
-  otherUserInfo: UserInfo;
+  otherUserInfo: UserInfo | null;
 }
 
 export default function ChatMessageList({
@@ -144,7 +144,7 @@ export default function ChatMessageList({
 
   return (
     <section className="flex flex-col">
-      <AddTopBar title={otherUserInfo.username} />
+      <AddTopBar title={otherUserInfo?.username ?? "(알 수 없음)"} />
       <main className="flex flex-col pt-[53px]">
         <div
           ref={chatRoomRef}
@@ -161,7 +161,7 @@ export default function ChatMessageList({
                     : "justify-start"
                 }`}
               >
-                {message.user.avatar ? (
+                {message.user?.avatar ? (
                   <div
                     className={`bg-neutral-300 rounded-full flex justify-center flex-shrink-0 items-center size-8 overflow-hidden ${
                       loginUserInfo.id === message.userId ? "hidden" : ""
@@ -208,7 +208,13 @@ export default function ChatMessageList({
           })}
         </div>
         <div className="px-5">
-          <InputForm handleSubmit={handleSubmit} />
+          {otherUserInfo ? (
+            <InputForm handleSubmit={handleSubmit} />
+          ) : (
+            <div className="cursor-not-allowed bg-neutral-100 text-neutral-400 flex-1 px-3 py-2 rounded-sm border-none outline-none">
+              대화가 불가능한 사용자입니다
+            </div>
+          )}
         </div>
       </main>
     </section>

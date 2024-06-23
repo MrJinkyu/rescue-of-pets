@@ -17,15 +17,15 @@ export default async function ChatDetail({
   const initMessageList = await getInitMessages(room.id);
   const session = await getSession();
   const loginUserId = session.id!;
-  const otherUser = room.users.find((user) => user.id !== loginUserId)!;
-  const otherUserInfo = await getUserInfo(otherUser.id);
+  const otherUser = room.users.find((user) => user.id !== loginUserId);
+  const otherUserInfo = otherUser ? await getUserInfo(otherUser.id) : null;
   const loginUserInfo = await getUserInfo(loginUserId);
   return (
     <ChatMessageList
       chatRoomId={room.id}
       initMessageList={initMessageList.reverse()}
       loginUserInfo={loginUserInfo!}
-      otherUserInfo={otherUserInfo!}
+      otherUserInfo={otherUserInfo}
     />
   );
 }
