@@ -47,10 +47,13 @@ export default async function MyPage() {
           내 게시물
         </div>
         <div className="pb-4  flex flex-col gap-2 *:border-b cursor-pointer">
-          <li className="flex items-center justify-between py-2">
+          <Link
+            href="/mypage/temporary-protection"
+            className="flex items-center justify-between py-2"
+          >
             <span>임시보호</span>
             <ChevronRightIcon className="size-6" />
-          </li>
+          </Link>
           <Link
             href="/mypage/report"
             className="flex items-center justify-between py-2"

@@ -20,9 +20,13 @@ interface StoryListProps {
       likes: number;
     };
   }[];
+  isMypage?: boolean;
 }
 
-export default function StoryList({ initList }: StoryListProps) {
+export default function StoryList({
+  initList,
+  isMypage = false,
+}: StoryListProps) {
   const [posts, setPosts] = useState(initList);
   const [page, setPage] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
@@ -60,7 +64,11 @@ export default function StoryList({ initList }: StoryListProps) {
   }, [page]);
 
   return (
-    <div className="bg-neutral-100 flex flex-col gap-4 p-4">
+    <div
+      className={`bg-neutral-100 flex flex-col gap-4 ${
+        isMypage ? "pt-[69px] px-4" : "p-4"
+      }`}
+    >
       {posts.map((post) => (
         <StoryCard key={post.id} {...post} />
       ))}

@@ -1,5 +1,5 @@
 import ReportList from "@/components/(report)/report-list";
-import { getInitMyReports } from "../../report/action";
+import { getInitMyReports } from "../../../(pages)/report/action";
 import AddTopBar from "@/components/common/add-top-bar";
 
 export default async function MyReport() {
@@ -7,7 +7,7 @@ export default async function MyReport() {
   return (
     <section className="w-full">
       <AddTopBar title="내 실종신고" />
-      <ReportList initList={myReports} />
+      <ReportList initList={myReports} isMypage />
     </section>
   );
 }

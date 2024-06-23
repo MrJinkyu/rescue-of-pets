@@ -19,9 +19,13 @@ interface ReportListProps {
     weight: string;
     color: string;
   }[];
+  isMypage?: boolean;
 }
 
-export default function ReportList({ initList }: ReportListProps) {
+export default function ReportList({
+  initList,
+  isMypage = false,
+}: ReportListProps) {
   const [posts, setPosts] = useState(initList);
   const [page, setPage] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
@@ -56,7 +60,7 @@ export default function ReportList({ initList }: ReportListProps) {
     };
   }, [page]);
   return (
-    <div className="grid grid-cols-2">
+    <div className={`grid grid-cols-2 ${isMypage ? "pt-[53px]" : ""}`}>
       {posts.map((post) => (
         <ReportCard key={post.id} {...post} />
       ))}

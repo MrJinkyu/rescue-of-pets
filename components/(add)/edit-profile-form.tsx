@@ -42,12 +42,12 @@ export default function EditProfileForm({
         />
         <label
           htmlFor="file"
-          className="cursor-pointer flex flex-col justify-end items-center size-32 rounded-full bg-neutral-50/50 ring-neutral-300 ring-1 active:ring-mainColor active:bg-sky-50/50 bg-center bg-cover"
+          className="cursor-pointer flex flex-col justify-end items-center size-24 rounded-full bg-neutral-50/50 ring-neutral-300 ring-1 active:ring-mainColor active:bg-sky-50/50 bg-center bg-cover"
           style={{ backgroundImage: `url(${preview})` }}
         >
           {!preview && (
             <>
-              <UserIcon className="size-24 text-neutral-400" />
+              <UserIcon className="size-16 text-neutral-400" />
             </>
           )}
         </label>
