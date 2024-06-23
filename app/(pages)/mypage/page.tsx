@@ -55,10 +55,13 @@ export default async function MyPage() {
             <span>실종신고</span>
             <ChevronRightIcon className="size-6" />
           </li>
-          <li className="flex items-center justify-between py-2">
+          <Link
+            href="/mypage/story"
+            className="flex items-center justify-between py-2"
+          >
             <span>스토리</span>
             <ChevronRightIcon className="size-6" />
-          </li>
+          </Link>
         </ul>
       </article>
     </section>

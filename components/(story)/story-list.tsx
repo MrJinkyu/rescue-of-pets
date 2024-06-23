@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import StoryCard from "./story-card";
-import { getMoreStory } from "@/app/(pages)/story/action";
+import { getMoreMyStory } from "@/app/(pages)/story/action";
 
 interface StoryListProps {
   initList: {
@@ -20,9 +20,13 @@ interface StoryListProps {
       likes: number;
     };
   }[];
+  isMyStory?: boolean;
 }
 
-export default function StoryList({ initList }: StoryListProps) {
+export default function StoryList({
+  initList,
+  isMyStory = false,
+}: StoryListProps) {
   const [posts, setPosts] = useState(initList);
   const [page, setPage] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
@@ -37,7 +41,7 @@ export default function StoryList({ initList }: StoryListProps) {
         const element = entries[0];
         if (trigger.current && element.isIntersecting) {
           observer.unobserve(trigger.current);
-          const nextPosts = await getMoreStory(page + 1);
+          const nextPosts = await getMoreMyStory(page + 1);
 
           if (nextPosts.length !== 0) {
             setPosts((prev) => [...prev, ...nextPosts]);
