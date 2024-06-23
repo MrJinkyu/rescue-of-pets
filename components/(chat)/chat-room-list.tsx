@@ -21,7 +21,7 @@ export default function ChatRoomList({
   return (
     <Link
       href={`/chat/${id}`}
-      className={`w-full h-[81px] p-4  flex items-center border-b border-neutral-200 text-black last:border-b-0 hover:bg-neutral-50 transition-colors ${
+      className={`cursor-pointer w-full h-[81px] p-4  flex items-center border-neutral-200 text-black hover:bg-neutral-50 transition-colors ${
         username ? "" : "opacity-50"
       }`}
     >
@@ -36,17 +36,21 @@ export default function ChatRoomList({
           </div>
         )}
       </div>
-      <div className="flex flex-col">
-        <div>
-          <span className="text-md mr-4">{username ?? "(알 수 없음)"}</span>
-          <span className="text-xs text-neutral-300">
+      <div className="flex flex-col flex-grow">
+        <div className="flex justify-between items-center">
+          <span className="text-lg mr-4">{username ?? "(알 수 없음)"}</span>
+          <span className="text-xs text-neutral-400">
             {formatTimeAgo(createdAt.toString())}
           </span>
         </div>
         {lastMessage ? (
-          <div className="text-md line-clamp-1">{lastMessage}</div>
+          <div className="text-md line-clamp-1 text-neutral-500">
+            {lastMessage}
+          </div>
         ) : (
-          <div>새로운 채팅방이 생성되었습니다</div>
+          <div className="text-md text-neutral-500">
+            새로운 채팅방이 생성되었습니다
+          </div>
         )}
       </div>
     </Link>
