@@ -4,11 +4,11 @@ import formatTimeAgo from "@/utils/formatTimeAgo";
 import { UserIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import AddTopBar from "../common/add-top-bar";
 import InputForm from "../common/input-form";
 import { RealtimeChannel, createClient } from "@supabase/supabase-js";
 import { SUPABASE_API, SUPABASE_URL } from "@/constants/chat";
 import { getMoreMessages, saveMessage } from "@/app/(detail)/chat/[id]/action";
+import ChatRoomTopBar from "./chat-room-top-bar";
 
 export interface UserInfo {
   id: number;
@@ -144,7 +144,10 @@ export default function ChatMessageList({
 
   return (
     <section className="flex flex-col">
-      <AddTopBar title={otherUserInfo?.username ?? "(알 수 없음)"} />
+      <ChatRoomTopBar
+        chatRoomId={chatRoomId}
+        title={otherUserInfo?.username ?? "(알 수 없음)"}
+      />
       <main className="flex flex-col pt-[53px]">
         <div
           ref={chatRoomRef}

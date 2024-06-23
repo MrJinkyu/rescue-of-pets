@@ -143,3 +143,23 @@ export async function saveMessage(
     },
   });
 }
+
+export async function leaveChatRoom(chatRoomId: string) {
+  const session = await getSession();
+  const loginUserId = session.id!;
+  try {
+    await prismaDB.chatRoom.update({
+      where: {
+        id: chatRoomId,
+      },
+      data: {
+        users: {
+          disconnect: {
+            id: loginUserId,
+          },
+        },
+      },
+    });
+  } catch (e) {}
+  redirect("/chat");
+}
