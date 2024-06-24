@@ -37,25 +37,55 @@ export async function deletePost(id: number, category: string) {
 export async function updatePost(id: number, category: string) {
   switch (category) {
     case "temporary-protection":
-      await prismaDB.temporaryProtection.update({
-        where: {
-          id,
-        },
-        data: {
-          isActive: false,
-        },
-      });
-      redirect("/");
+      try {
+        const temporaryProtection =
+          await prismaDB.temporaryProtection.findUnique({
+            where: {
+              id,
+            },
+            select: {
+              isActive: true,
+            },
+          });
+        if (temporaryProtection!.isActive) {
+          await prismaDB.temporaryProtection.update({
+            where: {
+              id,
+            },
+            data: {
+              isActive: false,
+            },
+          });
+        }
+      } catch (e) {
+      } finally {
+        redirect("/");
+      }
     case "report":
-      await prismaDB.report.update({
-        where: {
-          id,
-        },
-        data: {
-          isActive: false,
-        },
-      });
-      redirect("/report");
+      try {
+        const report = await prismaDB.report.findUnique({
+          where: {
+            id,
+          },
+          select: {
+            isActive: true,
+          },
+        });
+        if (report?.isActive) {
+          await prismaDB.report.update({
+            where: {
+              id,
+            },
+            data: {
+              isActive: false,
+            },
+          });
+        }
+        redirect("/report");
+      } catch (e) {
+      } finally {
+        redirect("/report");
+      }
     case "story":
       break;
     default:

@@ -6,7 +6,6 @@ export default async function Chat() {
   const session = await getSession();
   const userId = session.id!;
   const chatRoomList = await getChatRoomList(userId);
-  console.log(chatRoomList[0].users[0]);
   return (
     <div className="flex flex-col border-b-2 last:border-none border-neutral-500">
       {chatRoomList.map((room) => (

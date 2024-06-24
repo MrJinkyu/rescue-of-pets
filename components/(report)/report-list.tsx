@@ -1,6 +1,6 @@
 "use client";
 
-import { getMoreMyReports } from "@/app/(pages)/report/action";
+import { getMoreMyReports, getMoreReports } from "@/app/(pages)/report/action";
 import ReportCard from "./report-card";
 import { useEffect, useRef, useState } from "react";
 
@@ -30,6 +30,7 @@ export default function ReportList({
   const [page, setPage] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
   const trigger = useRef<HTMLSpanElement>(null);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       async (
@@ -39,7 +40,9 @@ export default function ReportList({
         const element = entries[0];
         if (trigger.current && element.isIntersecting) {
           observer.unobserve(trigger.current);
-          const nextPosts = await getMoreMyReports(page + 1);
+          const nextPosts = isMypage
+            ? await getMoreMyReports(page + 1)
+            : await getMoreReports(page + 1);
           if (nextPosts.length !== 0) {
             setPosts((prev) => [...prev, ...nextPosts]);
             setPage((prev) => prev + 1);
@@ -58,7 +61,7 @@ export default function ReportList({
     return () => {
       observer.disconnect();
     };
-  }, [page]);
+  }, [page, isMypage]);
   return (
     <div className={`grid grid-cols-2 ${isMypage ? "pt-[53px]" : ""}`}>
       {posts.map((post) => (

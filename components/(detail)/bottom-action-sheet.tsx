@@ -24,14 +24,14 @@ export default function BottomActionSheet({
               action={() => updatePost(id, category)}
               className="bg-white p-2 rounded-md w-full flex gap-2 items-center justify-center flex-1  cursor-pointer text-blue-500 font-medium hover:bg-neutral-200"
             >
-              <button>완료 처리하기</button>
+              <button className="w-full">완료 처리하기</button>
             </form>
           )}
           <form
             action={() => deletePost(id, category)}
             className="bg-white p-2 rounded-md w-full flex gap-2 items-center justify-center flex-1 cursor-pointer text-red-500 font-medium hover:bg-neutral-200"
           >
-            <button>글 삭제하기</button>
+            <button className="w-full">글 삭제하기</button>
           </form>
           <ModalCancelButton
             cancelBottomActionSheet={cancelBottomActionSheet}

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import StoryCard from "./story-card";
-import { getMoreMyStory } from "@/app/(pages)/story/action";
+import { getMoreMyStory, getMoreStory } from "@/app/(pages)/story/action";
 
 interface StoryListProps {
   initList: {
@@ -31,7 +31,6 @@ export default function StoryList({
   const [page, setPage] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
   const trigger = useRef<HTMLSpanElement>(null);
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       async (
@@ -41,8 +40,9 @@ export default function StoryList({
         const element = entries[0];
         if (trigger.current && element.isIntersecting) {
           observer.unobserve(trigger.current);
-          const nextPosts = await getMoreMyStory(page + 1);
-
+          const nextPosts = isMypage
+            ? await getMoreMyStory(page + 1)
+            : await getMoreStory(page + 1);
           if (nextPosts.length !== 0) {
             setPosts((prev) => [...prev, ...nextPosts]);
             setPage((prev) => prev + 1);
@@ -61,18 +61,18 @@ export default function StoryList({
     return () => {
       observer.disconnect();
     };
-  }, [page]);
+  }, [page, isMypage]);
 
   return (
     <div
-      className={`bg-neutral-100 flex flex-col gap-4 ${
+      className={`bg-neutral-100 flex flex-col gap-4 last-of-type:pb-4 ${
         isMypage ? "pt-[69px] px-4" : "p-4"
       }`}
     >
       {posts.map((post) => (
         <StoryCard key={post.id} {...post} />
       ))}
-      {!isLastPage && <span ref={trigger} className="w-full h-0" />}
+      {!isLastPage && <span ref={trigger} className="w-full" />}
     </div>
   );
 }

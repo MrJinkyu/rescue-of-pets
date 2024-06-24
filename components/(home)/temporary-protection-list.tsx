@@ -2,7 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import TemporaryProtectionCard from "./temporary-protection-card";
-import { getMoreMyTemporaryProtections } from "@/app/(pages)/(home)/action";
+import {
+  getMoreMyTemporaryProtections,
+  getMoreTemporaryProtections,
+} from "@/app/(pages)/(home)/action";
 
 interface TemporaryProtectionListProps {
   initList: {
@@ -36,7 +39,9 @@ export default function TemporaryProtectionList({
         const element = entries[0];
         if (trigger.current && element.isIntersecting) {
           observer.unobserve(trigger.current);
-          const nextPosts = await getMoreMyTemporaryProtections(page + 1);
+          const nextPosts = isMypage
+            ? await getMoreMyTemporaryProtections(page + 1)
+            : await getMoreTemporaryProtections(page + 1);
           if (nextPosts.length !== 0) {
             setPosts((prev) => [...prev, ...nextPosts]);
             setPage((prev) => prev + 1);
@@ -55,7 +60,7 @@ export default function TemporaryProtectionList({
     return () => {
       observer.disconnect();
     };
-  }, [page]);
+  }, [page, isMypage]);
   return (
     <div className={`${isMypage ? "pt-[53px]" : ""}`}>
       {posts.map((post) => (

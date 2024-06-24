@@ -12,9 +12,11 @@ export default function SubmitButton({ text }: SubmitButtonProps) {
   return (
     <button
       disabled={pending}
-      className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-screen-sm bg-mainColor text-white font-semibold text-lg py-3 active:opacity-80"
+      className={`fixed bottom-0 left-0 right-0 mx-auto w-full max-w-screen-sm bg-mainColor text-white font-semibold text-lg py-3 active:opacity-80 ${
+        pending ? "opacity-50 cursor-wait" : ""
+      }`}
     >
-      {text}
+      {pending ? "등록중..." : text}
     </button>
   );
 }
