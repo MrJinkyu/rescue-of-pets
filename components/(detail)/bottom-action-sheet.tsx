@@ -17,22 +17,19 @@ export default function BottomActionSheet({
 }: BottomActionSheetProps) {
   return (
     <ModalOverlay cancelBottomActionSheet={cancelBottomActionSheet}>
-      <div className="fixed right-0 left-0 mx-auto bottom-0 max-w-screen-sm bg-white animate-fadeInUp z-30">
-        <nav className="flex flex-col items-center p-4 gap-4">
-          <div className="flex items-center text-neutral-400 text-sm">
-            작업을 선택하세요
-          </div>
+      <div className="fixed right-0 left-0 mx-auto bottom-0 max-w-screen-sm bg-neutral-100 animate-fadeInUp z-30">
+        <nav className="flex flex-col items-center pt-6 px-6 pb-10 gap-4">
           {category !== "story" && (
             <form
               action={() => updatePost(id, category)}
-              className="flex gap-2 items-center justify-center flex-1  cursor-pointer text-black font-semibold"
+              className="bg-white p-2 rounded-md w-full flex gap-2 items-center justify-center flex-1  cursor-pointer text-blue-500 font-medium hover:bg-neutral-200"
             >
               <button>완료로 수정하기</button>
             </form>
           )}
           <form
             action={() => deletePost(id, category)}
-            className="flex gap-2 items-center justify-center flex-1 cursor-pointer text-black font-semibold"
+            className="bg-white p-2 rounded-md w-full flex gap-2 items-center justify-center flex-1 cursor-pointer text-red-500 font-medium hover:bg-neutral-200"
           >
             <button>글 삭제하기</button>
           </form>
