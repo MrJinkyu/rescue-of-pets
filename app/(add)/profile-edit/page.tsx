@@ -13,10 +13,10 @@ export default async function ProfileEdit() {
     <div>
       <AddTopBar title="프로필 편집" />
       <EditProfileForm {...userInfo!} />
-      <div className="fixed bottom-6 left-0 right-0 mx-auto w-full max-w-screen-sm pr-6 flex items-center justify-end *:text-neutral-500">
+      <div className="absolute bottom-6 left-0 right-0 mx-auto w-full max-w-screen-sm pr-6 flex items-center justify-end *:text-neutral-500">
         <LogoutButton />
         <span className="mx-4">|</span>
-        <DeleteUserButton />
+        <DeleteUserButton loginUserId={loginUserId} />
       </div>
     </div>
   );

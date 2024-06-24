@@ -76,12 +76,10 @@ export async function editProfile(_: any, formData: FormData) {
   }
 }
 
-export async function deleteUser() {
-  const session = await getSession();
-  const userId = session.id!;
+export async function deleteUser(id: number) {
   await prismaDB.user.delete({
     where: {
-      id: userId,
+      id,
     },
   });
   redirect("/login");

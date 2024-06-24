@@ -31,10 +31,14 @@ export default function DetailTopBar({
     <div className="fixed top-0 w-full max-w-screen-sm mx-auto flex items-center justify-between px-5 py-3 z-20 bg-white">
       <BackButton />
       <h1 className="font-semibold text-xl text-mainColor">meetAgain</h1>
-      <EllipsisHorizontalIcon
-        onClick={onClick}
-        className="size-6 cursor-pointer"
-      />
+      {isOwner ? (
+        <EllipsisHorizontalIcon
+          onClick={onClick}
+          className="size-6 cursor-pointer"
+        />
+      ) : (
+        <div className="size-6" />
+      )}
       {visible && (
         <BottomActionSheet
           id={id}

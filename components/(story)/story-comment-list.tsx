@@ -51,9 +51,11 @@ export default function StoryCommentList({
     await createComment(storyId, text);
   };
   return (
-    <div className="mt-[53px] px-4">
-      <InputForm handleSubmit={handleSubmit} />
-      <div className="px-2 py-2">
+    <div className="mt-[52px] px-6">
+      <div className="fixed top-[52px] left-0 right-0 w-full max-w-screen-sm mx-auto px-6 pt-4 bg-white z-10">
+        <InputForm handleSubmit={handleSubmit} />
+      </div>
+      <div className="pt-14 pb-2">
         {state.map((comment) => (
           <StoryCommentCard key={comment.id} {...comment} />
         ))}
