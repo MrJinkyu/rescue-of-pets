@@ -1,6 +1,6 @@
 "use server";
 
-import { TAG_HOME_LIST } from "@/constants/cache";
+import { TAG_HOME_LIST, TAG_REPORT_LIST } from "@/constants/cache";
 import prismaDB from "@/database/db";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
@@ -23,6 +23,7 @@ export async function deletePost(id: number, category: string) {
         },
         select: null,
       });
+      revalidateTag(TAG_REPORT_LIST);
       redirect("/report");
     case "story":
       await prismaDB.story.delete({
@@ -84,6 +85,7 @@ export async function updatePost(id: number, category: string) {
               isActive: false,
             },
           });
+          revalidateTag(TAG_REPORT_LIST);
         }
         redirect("/report");
       } catch (e) {
