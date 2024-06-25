@@ -1,6 +1,9 @@
 import TemporaryProtectionList from "@/components/(home)/temporary-protection-list";
 import AddButton from "@/components/common/add-button";
-import { getInitTemporaryProtections } from "./action";
+import {
+  getCachedInitTemporaryProtections,
+  getInitTemporaryProtections,
+} from "./action";
 
 // async function waitUi() {
 //   await new Promise((resolve) => setTimeout(resolve, 10000));
@@ -8,7 +11,7 @@ import { getInitTemporaryProtections } from "./action";
 // const test = await waitUi()
 
 export default async function Home() {
-  const temporaryProtections = await getInitTemporaryProtections();
+  const temporaryProtections = await getCachedInitTemporaryProtections();
 
   return (
     <section className="w-full">
