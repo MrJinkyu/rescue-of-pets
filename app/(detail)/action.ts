@@ -1,6 +1,10 @@
 "use server";
 
-import { TAG_HOME_LIST, TAG_REPORT_LIST } from "@/constants/cache";
+import {
+  TAG_HOME_LIST,
+  TAG_REPORT_LIST,
+  TAG_STORY_LIST,
+} from "@/constants/cache";
 import prismaDB from "@/database/db";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
@@ -32,6 +36,7 @@ export async function deletePost(id: number, category: string) {
         },
         select: null,
       });
+      revalidateTag(TAG_STORY_LIST);
       redirect("/story");
     default:
       break;
@@ -92,8 +97,6 @@ export async function updatePost(id: number, category: string) {
       } finally {
         redirect("/report");
       }
-    case "story":
-      break;
     default:
       break;
   }

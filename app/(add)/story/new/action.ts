@@ -1,7 +1,9 @@
 "use server";
 
+import { TAG_STORY_LIST } from "@/constants/cache";
 import prismaDB from "@/database/db";
 import { getSession } from "@/session/getSession";
+import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -29,6 +31,7 @@ export async function addStory(data: any) {
       id: true,
     },
   });
+  revalidateTag(TAG_STORY_LIST);
   return story;
 }
 

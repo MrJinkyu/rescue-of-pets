@@ -1,6 +1,6 @@
 "use server";
 
-import { KEY_HOME_LIST, TAG_HOME_LIST } from "@/constants/cache";
+import { KEY_HOME_LIST, TAG_HOME_LIST, TAG_PAGE_LIST } from "@/constants/cache";
 import prismaDB from "@/database/db";
 import { getSession } from "@/session/getSession";
 import { unstable_cache } from "next/cache";
@@ -30,7 +30,7 @@ export const getCachedInitTemporaryProtections = unstable_cache(
   getInitTemporaryProtections,
   [KEY_HOME_LIST],
   {
-    tags: [TAG_HOME_LIST],
+    tags: [TAG_PAGE_LIST, TAG_HOME_LIST],
   }
 );
 

@@ -5,6 +5,8 @@ import { getSession } from "@/session/getSession";
 import { uploadImage } from "../report/new/action";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { revalidateTag } from "next/cache";
+import { TAG_PAGE_LIST } from "@/constants/cache";
 
 const dataSchema = z.object({
   username: z
@@ -27,6 +29,7 @@ export async function editAvatarAndUsername(userInfo: any) {
       id: true,
     },
   });
+  revalidateTag(TAG_PAGE_LIST);
 }
 
 export async function editOnlyUsername(userInfo: any) {
@@ -42,6 +45,17 @@ export async function editOnlyUsername(userInfo: any) {
       id: true,
     },
   });
+  revalidateTag(TAG_PAGE_LIST);
+}
+
+export async function deleteUser(id: number) {
+  await prismaDB.user.delete({
+    where: {
+      id,
+    },
+  });
+  revalidateTag(TAG_PAGE_LIST);
+  redirect("/login");
 }
 
 function isValidFile(file: File) {
@@ -49,7 +63,6 @@ function isValidFile(file: File) {
 }
 
 export async function editProfile(_: any, formData: FormData) {
-  console.log("편집 실행됌");
   const data = {
     username: formData.get("username"),
     photo: formData.get("photo"),
@@ -74,13 +87,4 @@ export async function editProfile(_: any, formData: FormData) {
     }
     redirect("/mypage");
   }
-}
-
-export async function deleteUser(id: number) {
-  await prismaDB.user.delete({
-    where: {
-      id,
-    },
-  });
-  redirect("/login");
 }

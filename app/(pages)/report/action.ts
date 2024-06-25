@@ -1,6 +1,10 @@
 "use server";
 
-import { KEY_REPORT_LIST, TAG_REPORT_LIST } from "@/constants/cache";
+import {
+  KEY_REPORT_LIST,
+  TAG_PAGE_LIST,
+  TAG_REPORT_LIST,
+} from "@/constants/cache";
 import prismaDB from "@/database/db";
 import { getSession } from "@/session/getSession";
 import { unstable_cache } from "next/cache";
@@ -33,7 +37,7 @@ export const getCachedInitReports = unstable_cache(
   getInitReports,
   [KEY_REPORT_LIST],
   {
-    tags: [TAG_REPORT_LIST],
+    tags: [TAG_PAGE_LIST, TAG_REPORT_LIST],
   }
 );
 

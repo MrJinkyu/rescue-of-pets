@@ -1,7 +1,13 @@
 "use server";
 
+import {
+  KEY_STORY_LIST,
+  TAG_PAGE_LIST,
+  TAG_STORY_LIST,
+} from "@/constants/cache";
 import prismaDB from "@/database/db";
 import { getSession } from "@/session/getSession";
+import { unstable_cache } from "next/cache";
 
 export async function getInitStory() {
   const storys = await prismaDB.story.findMany({
@@ -31,6 +37,14 @@ export async function getInitStory() {
   });
   return storys;
 }
+
+export const getCachedInitStory = unstable_cache(
+  getInitStory,
+  [KEY_STORY_LIST],
+  {
+    tags: [TAG_PAGE_LIST, TAG_STORY_LIST],
+  }
+);
 
 export async function getMoreStory(page: number) {
   const storys = await prismaDB.story.findMany({
