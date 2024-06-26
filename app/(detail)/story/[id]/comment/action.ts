@@ -1,5 +1,11 @@
 "use server";
 
+import {
+  KEY_COMMENT_LIST,
+  TAG_COMMENT_LIST,
+  TAG_STORY_DETAIL,
+  TAG_STORY_LIST,
+} from "@/constants/cache";
 import prismaDB from "@/database/db";
 import { getSession } from "@/session/getSession";
 import { revalidateTag, unstable_cache } from "next/cache";
@@ -17,7 +23,9 @@ export async function createComment(storyId: number, payload: string) {
         payload: true,
       },
     });
-    revalidateTag(`comment-list-${storyId}`);
+    revalidateTag(TAG_STORY_LIST);
+    revalidateTag(`${TAG_STORY_DETAIL}-${storyId}`);
+    revalidateTag(`${TAG_COMMENT_LIST}-${storyId}`);
   } catch (e) {}
 }
 
@@ -44,9 +52,9 @@ export async function getComments(storyId: number) {
 export async function getCacheComments(storyId: number) {
   const cachedComment = unstable_cache(
     getComments,
-    [`comment-list-${storyId}`],
+    [`${KEY_COMMENT_LIST}-${storyId}`],
     {
-      tags: [`comment-list-${storyId}`],
+      tags: [`${TAG_COMMENT_LIST}-${storyId}`],
     }
   );
   return cachedComment(storyId);

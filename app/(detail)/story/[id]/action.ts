@@ -1,5 +1,13 @@
 "use server";
 
+import {
+  KEY_LIKE_STATUS,
+  KEY_STORY_DETAIL,
+  TAG_LIKE_STATUS,
+  TAG_PAGE_LIST,
+  TAG_STORY_DETAIL,
+  TAG_STORY_LIST,
+} from "@/constants/cache";
 import prismaDB from "@/database/db";
 import { getSession } from "@/session/getSession";
 import { revalidateTag, unstable_cache } from "next/cache";
@@ -28,15 +36,14 @@ export async function getStory(storyId: number) {
 }
 
 export async function getCachedStory(storyId: number) {
-  const cached = unstable_cache(
-    (storyId) => getStory(storyId),
-    [`story-detail`],
+  const cacheOperation = unstable_cache(
+    getStory,
+    [`${KEY_STORY_DETAIL}-${storyId}`],
     {
-      tags: [`story-detail`, `comment-list-${storyId}`],
-      revalidate: 60,
+      tags: [TAG_PAGE_LIST, `${KEY_STORY_DETAIL}-${storyId}`],
     }
   );
-  return cached(storyId);
+  return cacheOperation(storyId);
 }
 
 export async function getLikeStatus(storyId: number, userId: number) {
@@ -57,14 +64,14 @@ export async function getLikeStatus(storyId: number, userId: number) {
 }
 
 export async function getCachedLikeStatus(storyId: number, userId: number) {
-  const cached = unstable_cache(
-    (storyId, userId) => getLikeStatus(storyId, userId),
-    [`story-liked-${storyId}`],
+  const cacheOperation = unstable_cache(
+    getLikeStatus,
+    [`${KEY_LIKE_STATUS}-${storyId}`],
     {
-      tags: [`story-liked-${storyId}`],
+      tags: [TAG_PAGE_LIST, `${TAG_LIKE_STATUS}-${storyId}`],
     }
   );
-  return cached(storyId, userId);
+  return cacheOperation(storyId, userId);
 }
 
 export async function likeStory(storyId: number) {
@@ -76,7 +83,9 @@ export async function likeStory(storyId: number) {
         userId: session.id!,
       },
     });
-    revalidateTag(`story-liked-${storyId}`);
+    revalidateTag(TAG_STORY_LIST);
+    revalidateTag(TAG_STORY_DETAIL);
+    revalidateTag(`${TAG_LIKE_STATUS}-${storyId}`);
   } catch (e) {}
 }
 
@@ -91,7 +100,9 @@ export async function disLikeStory(storyId: number) {
         },
       },
     });
-    revalidateTag(`story-liked-${storyId}`);
+    revalidateTag(TAG_STORY_LIST);
+    revalidateTag(TAG_STORY_DETAIL);
+    revalidateTag(`${TAG_LIKE_STATUS}-${storyId}`);
   } catch (e) {}
 }
 

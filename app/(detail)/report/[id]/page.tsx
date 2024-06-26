@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getReport } from "./action";
+import { getCachedReport } from "./action";
 import { getSession } from "@/session/getSession";
 import DetailTopBar from "@/components/common/detail-top-bar";
 import ProfileBar from "@/components/common/profile-bar";
@@ -17,7 +17,7 @@ export default async function ReportDetail({
   if (isNaN(id)) {
     notFound();
   }
-  const report = await getReport(id);
+  const report = await getCachedReport(id);
   if (!report) {
     notFound();
   }

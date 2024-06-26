@@ -27,7 +27,7 @@ export default async function StoryDetail({
     photo,
     title,
     contents,
-    _count: { likes, comments },
+    _count: { comments },
   } = story;
   const user = await getSession();
   const isOwner = userId === user.id;

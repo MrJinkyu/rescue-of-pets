@@ -1,8 +1,10 @@
 "use server";
 
 import {
+  KEY_STORY_DETAIL,
   TAG_HOME_DETAIL,
   TAG_HOME_LIST,
+  TAG_REPORT_DETAIL,
   TAG_REPORT_LIST,
   TAG_STORY_LIST,
 } from "@/constants/cache";
@@ -20,6 +22,7 @@ export async function deletePost(id: number, category: string) {
         select: null,
       });
       revalidateTag(TAG_HOME_LIST);
+      revalidateTag(`${TAG_HOME_DETAIL}-${id}`);
       redirect("/");
     case "report":
       await prismaDB.report.delete({
@@ -29,6 +32,7 @@ export async function deletePost(id: number, category: string) {
         select: null,
       });
       revalidateTag(TAG_REPORT_LIST);
+      revalidateTag(`${TAG_REPORT_DETAIL}-${id}`);
       redirect("/report");
     case "story":
       await prismaDB.story.delete({
@@ -38,6 +42,7 @@ export async function deletePost(id: number, category: string) {
         select: null,
       });
       revalidateTag(TAG_STORY_LIST);
+      revalidateTag(`${KEY_STORY_DETAIL}-${id}`);
       redirect("/story");
     default:
       break;
@@ -93,6 +98,7 @@ export async function updatePost(id: number, category: string) {
             },
           });
           revalidateTag(TAG_REPORT_LIST);
+          revalidateTag(`${TAG_REPORT_DETAIL}-${id}`);
         }
         redirect("/report");
       } catch (e) {

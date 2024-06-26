@@ -63,11 +63,11 @@ export default function StoryCard({
         </div>
         <div className="flex items-center gap-3 *:text-sm *:text-neutral-500 *:font-medium">
           <div className="flex items-center gap-1">
-            <HeartIcon className="size-6" /> <span>{likes}</span>
+            <span>좋아요</span> <span>{likes}개</span>
           </div>
           <div className="flex items-center gap-1">
-            <ChatBubbleBottomCenterIcon className="size-6" />{" "}
-            <span>{comments}</span>
+            <span>댓글</span>
+            <span>{comments}개</span>
           </div>
         </div>
       </main>
