@@ -3,6 +3,9 @@
 import prismaDB from "@/database/db";
 
 export async function getChatRoomList(userId: number) {
+  if (!userId) {
+    return [];
+  }
   const chatRoomList = await prismaDB.chatRoom.findMany({
     where: {
       users: {
