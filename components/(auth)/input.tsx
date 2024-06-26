@@ -19,7 +19,7 @@ export default function Input({
         name={name}
         {...props}
         className={`border-none outline-none flex-1 ring-2 rounded-sm p-2 focus:ring-blue-500 ${
-          errors.length > 0 ? "ring-blue-500" : "ring-neutral-400"
+          errors.length > 0 ? "ring-blue-500" : "ring-neutral-300"
         }`}
       />
       <div className="text-red-500">{errors[0]}</div>

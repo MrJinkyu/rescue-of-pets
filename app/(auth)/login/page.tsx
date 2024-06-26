@@ -11,11 +11,13 @@ export default function Login() {
   const [state, dispatch] = useFormState(loginUser, null);
   return (
     <section className=" flex flex-col items-center justify-center w-full h-screen">
-      <AddTopBar title="로그인" />
+      <AddTopBar title="로그인" isAuth />
       <main className="flex flex-col items-center gap-8 w-full">
         <div className="flex flex-col gap-2 items-center text-black">
-          <p className="font-semibold text-3xl">Login Account</p>
-          <p className="text-md text-neutral-400">please enter your details</p>
+          <p className="font-semibold text-3xl text-mainColor">Meet Again</p>
+          <p className="text-md text-neutral-400">
+            당신을 기다리고 있는 반려동물들
+          </p>
         </div>
         <form action={dispatch} className="flex flex-col gap-4 w-3/4">
           <Input
