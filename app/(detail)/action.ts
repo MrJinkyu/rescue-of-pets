@@ -1,6 +1,7 @@
 "use server";
 
 import {
+  TAG_HOME_DETAIL,
   TAG_HOME_LIST,
   TAG_REPORT_LIST,
   TAG_STORY_LIST,
@@ -66,6 +67,7 @@ export async function updatePost(id: number, category: string) {
             },
           });
           revalidateTag(TAG_HOME_LIST);
+          revalidateTag(`${TAG_HOME_DETAIL}-${id}`);
         }
       } catch (e) {
       } finally {

@@ -4,6 +4,8 @@ export const TAG_PAGE_LIST = "page-list";
 // home page
 export const KEY_HOME_LIST = "home-list";
 export const TAG_HOME_LIST = "home-list";
+export const KEY_HOME_DETAIL = "home-detail";
+export const TAG_HOME_DETAIL = "home-detail";
 
 // report page
 export const KEY_REPORT_LIST = "report-list";

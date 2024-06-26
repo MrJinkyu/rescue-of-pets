@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getTemporaryProtection } from "./action";
+import { getCachedTemporaryProtection } from "./action";
 import Image from "next/image";
 import TemporaryProtectionIsActive from "@/components/(home)/temporary-protection-isActive";
 import TemporaryProtectionGender from "@/components/(home)/temporary-protection-gender";
@@ -18,7 +18,7 @@ export default async function TemporaryProtectionDetail({
   if (isNaN(id)) {
     notFound();
   }
-  const temporaryProtection = await getTemporaryProtection(id);
+  const temporaryProtection = await getCachedTemporaryProtection(id);
   if (!temporaryProtection) {
     notFound();
   }
