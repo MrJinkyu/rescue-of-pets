@@ -1,6 +1,7 @@
 import { getSession } from "@/session/getSession";
 import { getChatRoomList } from "./action";
 import ChatRoomList from "@/components/(chat)/chat-room-list";
+import EmptyText from "@/components/common/empty-text";
 
 export default async function Chat() {
   const session = await getSession();
@@ -8,6 +9,9 @@ export default async function Chat() {
   const chatRoomList = await getChatRoomList(userId);
   return (
     <div className="flex flex-col border-b-2 last:border-none border-neutral-500">
+      {chatRoomList.length === 0 && (
+        <EmptyText text="채팅 리스트가 비어있습니다!" />
+      )}
       {chatRoomList.map((room) => (
         <ChatRoomList
           key={room.id}
