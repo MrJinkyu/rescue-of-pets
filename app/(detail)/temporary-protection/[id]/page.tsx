@@ -61,6 +61,7 @@ export default async function TemporaryProtectionDetail({
         <div className="flex flex-col">
           <TemporaryProtectionInfo title="구조 장소" value={rescuePlace} />
           <TemporaryProtectionInfo title="임보 지역" value={area} />
+          <TemporaryProtectionInfo title="동물 성별" value={gender} />
         </div>
         {description && (
           <div className="bg-neutral-100 rounded-md p-4 my-4 text-sm break-words">

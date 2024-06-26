@@ -14,8 +14,11 @@ const formSchema = z
   .object({
     username: z
       .string({
+        required_error: "닉네임은 필수 항목입니다",
         invalid_type_error: "닉네임은 문자열만 입력 가능합니다",
       })
+      .min(1, "닉네임은 최소 1자 이상입니다")
+      .max(15, "닉네임은 최대 15자 이하입니다")
       .trim(),
     email: z.string().trim().email().toLowerCase(),
     password: z

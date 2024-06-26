@@ -160,6 +160,23 @@ export async function leaveChatRoom(chatRoomId: string) {
         },
       },
     });
+    const room = await prismaDB.chatRoom.findUnique({
+      where: {
+        id: chatRoomId,
+      },
+      select: {
+        users: true,
+      },
+    });
+    if (room) {
+      if (room.users.length === 0) {
+        await prismaDB.chatRoom.delete({
+          where: {
+            id: chatRoomId,
+          },
+        });
+      }
+    }
   } catch (e) {}
   redirect("/chat");
 }
