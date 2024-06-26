@@ -1,11 +1,11 @@
 "use client";
 
 import { UserIcon } from "@heroicons/react/24/solid";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputText from "../common/input-text";
 import { useFormState } from "react-dom";
 import { editProfile } from "@/app/(add)/profile-edit/action";
-import LogoutButton from "../(mypage)/logout-button";
+import EditSaveButton from "./edit-save-button";
 
 interface EditProfileFormProps {
   id: number;
@@ -67,9 +67,7 @@ export default function EditProfileForm({
         isColumn
         isReadonly
       />
-      <button className="w-full my-6 h-12 bg-mainColor rounded-sm text-white font-semibold text-lg active:opacity-80">
-        저장하기
-      </button>
+      <EditSaveButton />
     </form>
   );
 }

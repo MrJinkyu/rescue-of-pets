@@ -3,6 +3,7 @@
 import {
   KEY_LIKE_STATUS,
   KEY_STORY_DETAIL,
+  KEY_USER_INFO,
   TAG_LIKE_STATUS,
   TAG_PAGE_LIST,
   TAG_STORY_DETAIL,
@@ -127,19 +128,4 @@ export async function getStoryComments(storyId: number) {
     },
   });
   return story;
-}
-
-export async function getUserInfo(id: number) {
-  const user = await prismaDB.user.findUnique({
-    where: {
-      id,
-    },
-    select: {
-      id: true,
-      avatar: true,
-      username: true,
-      email: true,
-    },
-  });
-  return user;
 }

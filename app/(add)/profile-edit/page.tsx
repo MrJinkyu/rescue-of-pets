@@ -1,14 +1,14 @@
 import EditProfileForm from "@/components/(add)/edit-profile-form";
 import AddTopBar from "@/components/common/add-top-bar";
-import { getUserInfo } from "@/app/(detail)/story/[id]/action";
 import { getSession } from "@/session/getSession";
 import LogoutButton from "@/components/(mypage)/logout-button";
 import DeleteUserButton from "@/components/(mypage)/delete-user-button";
+import { getCachedUserInfo } from "@/app/(pages)/mypage/action";
 
 export default async function ProfileEdit() {
   const session = await getSession();
   const loginUserId = session.id!;
-  const userInfo = await getUserInfo(loginUserId);
+  const userInfo = await getCachedUserInfo(loginUserId);
   return (
     <div>
       <AddTopBar title="프로필 편집" />

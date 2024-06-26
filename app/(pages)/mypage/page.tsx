@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { ChevronRightIcon, UserIcon } from "@heroicons/react/24/solid";
-import { getUserInfo } from "@/app/(detail)/story/[id]/action";
 import { getSession } from "@/session/getSession";
 import Link from "next/link";
+import { getCachedUserInfo } from "./action";
 
 export default async function MyPage() {
   const session = await getSession();
   const loginUserId = session.id!;
-  const userInfo = await getUserInfo(loginUserId);
+  const userInfo = await getCachedUserInfo(loginUserId);
   return (
     <section className="flex flex-col">
       <article className="bg-neutral-50 aspect-video flex flex-col justify-center items-center gap-4">

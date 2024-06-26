@@ -26,3 +26,7 @@ export const TAG_COMMENT_LIST = "comment-list";
 // like
 export const KEY_LIKE_STATUS = "like-status";
 export const TAG_LIKE_STATUS = "like-status";
+
+// mypage
+export const KEY_USER_INFO = "user-info";
+export const TAG_USER_INFO = "user-info";

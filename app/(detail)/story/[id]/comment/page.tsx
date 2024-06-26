@@ -3,8 +3,8 @@ import CommentTopBar from "@/components/common/comment-top-bar";
 import { notFound } from "next/navigation";
 import React from "react";
 import { getCacheComments } from "./action";
-import { getUserInfo } from "../action";
 import { getSession } from "@/session/getSession";
+import { getCachedUserInfo } from "@/app/(pages)/mypage/action";
 
 export default async function StoryComment({
   params,
@@ -17,7 +17,7 @@ export default async function StoryComment({
   }
   const comments = await getCacheComments(id);
   const session = await getSession();
-  const loginUser = await getUserInfo(session.id!);
+  const loginUser = await getCachedUserInfo(session.id!);
   return (
     <section>
       <CommentTopBar />

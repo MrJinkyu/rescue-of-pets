@@ -6,7 +6,7 @@ import { uploadImage } from "../report/new/action";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { revalidateTag } from "next/cache";
-import { TAG_PAGE_LIST } from "@/constants/cache";
+import { TAG_PAGE_LIST, TAG_USER_INFO } from "@/constants/cache";
 
 const dataSchema = z.object({
   username: z
@@ -17,9 +17,10 @@ const dataSchema = z.object({
 
 export async function editAvatarAndUsername(userInfo: any) {
   const session = await getSession();
+  const id = session.id!;
   await prismaDB.user.update({
     where: {
-      id: session.id!,
+      id,
     },
     data: {
       username: userInfo.username,
@@ -30,13 +31,15 @@ export async function editAvatarAndUsername(userInfo: any) {
     },
   });
   revalidateTag(TAG_PAGE_LIST);
+  revalidateTag(`${TAG_USER_INFO}-${id}`);
 }
 
 export async function editOnlyUsername(userInfo: any) {
   const session = await getSession();
+  const id = session.id!;
   await prismaDB.user.update({
     where: {
-      id: session.id!,
+      id,
     },
     data: {
       username: userInfo.username,
@@ -46,6 +49,7 @@ export async function editOnlyUsername(userInfo: any) {
     },
   });
   revalidateTag(TAG_PAGE_LIST);
+  revalidateTag(`${TAG_USER_INFO}-${id}`);
 }
 
 export async function deleteUser(id: number) {
@@ -55,6 +59,7 @@ export async function deleteUser(id: number) {
     },
   });
   revalidateTag(TAG_PAGE_LIST);
+  revalidateTag(`${TAG_USER_INFO}-${id}`);
   redirect("/login");
 }
 
