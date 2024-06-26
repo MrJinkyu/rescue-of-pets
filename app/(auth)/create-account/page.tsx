@@ -2,8 +2,6 @@
 
 import AuthButton from "@/components/(auth)/auth-button";
 import Input from "@/components/(auth)/input";
-import Line from "@/components/(auth)/line";
-import SmsButton from "@/components/(auth)/sms-button";
 import AddTopBar from "@/components/common/add-top-bar";
 import { useFormState } from "react-dom";
 import { createUser } from "./action";
@@ -53,8 +51,6 @@ export default function CreateAccount() {
           />
           <AuthButton text="회원가입" />
         </form>
-        <Line />
-        <SmsButton />
       </main>
     </section>
   );

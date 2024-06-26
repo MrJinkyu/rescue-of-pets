@@ -2,8 +2,6 @@
 
 import AuthButton from "@/components/(auth)/auth-button";
 import Input from "@/components/(auth)/input";
-import Line from "@/components/(auth)/line";
-import SmsButton from "@/components/(auth)/sms-button";
 import AddTopBar from "@/components/common/add-top-bar";
 import Link from "next/link";
 import { useFormState } from "react-dom";
@@ -47,8 +45,6 @@ export default function Login() {
             회원가입
           </Link>
         </div>
-        <Line />
-        <SmsButton />
       </main>
     </section>
   );

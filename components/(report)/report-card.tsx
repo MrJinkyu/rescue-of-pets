@@ -44,7 +44,7 @@ export default function ReportCard({
       <div className="flex items-center gap-2 py-2">
         <ReportIsActive isActive={isActive} />
         <div className="text-md font-semibold overflow-hidden whitespace-nowrap truncate">
-          {species} {detail ? `[${detail}]` : ""}
+          {species} {detail ? `(${detail})` : ""}
         </div>
       </div>
       <div className="text-xs pb-2 overflow-hidden whitespace-nowrap truncate">

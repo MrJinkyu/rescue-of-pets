@@ -40,7 +40,7 @@ export default async function TemporaryProtectionDetail({
   return (
     <section>
       <DetailTopBar
-        isOwner={isOwner}
+        isOwner={isOwner ? true : false}
         id={temporaryProtection.id}
         category="temporary-protection"
       />
