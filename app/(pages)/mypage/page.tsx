@@ -4,6 +4,10 @@ import { getSession } from "@/session/getSession";
 import Link from "next/link";
 import { getCachedUserInfo } from "./action";
 
+export const metadata = {
+  title: "마이메뉴",
+};
+
 export default async function MyPage() {
   const session = await getSession();
   const loginUserId = session.id!;

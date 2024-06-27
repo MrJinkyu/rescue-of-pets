@@ -3,6 +3,10 @@ import { getChatRoomList } from "./action";
 import ChatRoomList from "@/components/(chat)/chat-room-list";
 import EmptyText from "@/components/common/empty-text";
 
+export const metadata = {
+  title: "채팅",
+};
+
 export default async function Chat() {
   const session = await getSession();
   const userId = session.id!;
