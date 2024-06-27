@@ -8,12 +8,33 @@ import { z } from "zod";
 import { revalidateTag } from "next/cache";
 import { TAG_PAGE_LIST, TAG_USER_INFO } from "@/constants/cache";
 
-const dataSchema = z.object({
-  username: z
-    .string({ required_error: "닉네임은 필수 항목입니다" })
-    .min(1, "닉네임은 최소 1자 이상입니다")
-    .max(15, "닉네임은 최대 15자 이하입니다"),
-});
+const dataSchema = z
+  .object({
+    username: z
+      .string({ required_error: "닉네임은 필수 항목입니다" })
+      .min(1, "닉네임은 최소 1자 이상입니다")
+      .max(15, "닉네임은 최대 15자 이하입니다"),
+  })
+  .superRefine(async ({ username }, ctx) => {
+    // 닉네임 중복검사
+    const user = await prismaDB.user.findUnique({
+      where: {
+        username,
+      },
+      select: {
+        id: true,
+      },
+    });
+    if (user) {
+      ctx.addIssue({
+        code: "custom",
+        message: "이미 사용중인 닉네임입니다",
+        path: ["username"],
+        fatal: true,
+      });
+      return z.NEVER;
+    }
+  });
 
 export async function editAvatarAndUsername(userInfo: any) {
   const session = await getSession();
@@ -81,7 +102,7 @@ export async function editProfile(_: any, formData: FormData) {
       data.photo = null;
     }
   }
-  const results = dataSchema.safeParse(data);
+  const results = await dataSchema.safeParseAsync(data);
   if (!results.success) {
     return results.error.flatten();
   } else {
