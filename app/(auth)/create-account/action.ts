@@ -104,7 +104,7 @@ export async function createUser(_: any, formData: FormData) {
         id: true,
       },
     });
-    updateSession(user.id);
+    await updateSession(user.id);
     redirect("/");
   }
 }
