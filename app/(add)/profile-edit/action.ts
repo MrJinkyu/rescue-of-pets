@@ -8,37 +8,31 @@ import { z } from "zod";
 import { revalidateTag } from "next/cache";
 import { TAG_PAGE_LIST, TAG_USER_INFO } from "@/constants/cache";
 
-const dataSchema = z
-  .object({
-    username: z
-      .string({ required_error: "닉네임은 필수 항목입니다" })
-      .min(1, "닉네임은 최소 1자 이상입니다")
-      .max(15, "닉네임은 최대 15자 이하입니다"),
-  })
-  .superRefine(async ({ username }, ctx) => {
-    // 닉네임 중복검사
-    const user = await prismaDB.user.findUnique({
-      where: {
-        username,
-      },
-      select: {
-        id: true,
-      },
-    });
-    if (user) {
-      ctx.addIssue({
-        code: "custom",
-        message: "이미 사용중인 닉네임입니다",
-        path: ["username"],
-        fatal: true,
-      });
-      return z.NEVER;
-    }
-  });
+const dataSchema = z.object({
+  username: z
+    .string({ required_error: "닉네임은 필수 항목입니다" })
+    .min(1, "닉네임은 최소 1자 이상입니다")
+    .max(15, "닉네임은 최대 15자 이하입니다"),
+});
 
 export async function editAvatarAndUsername(userInfo: any) {
   const session = await getSession();
   const id = session.id!;
+  const currentUser = await prismaDB.user.findUnique({
+    where: { id },
+    select: { username: true },
+  });
+  if (currentUser?.username !== userInfo.username) {
+    const existingUser = await prismaDB.user.findFirst({
+      where: {
+        username: userInfo.username,
+        NOT: { id },
+      },
+    });
+    if (existingUser) {
+      return false;
+    }
+  }
   await prismaDB.user.update({
     where: {
       id,
@@ -53,11 +47,27 @@ export async function editAvatarAndUsername(userInfo: any) {
   });
   revalidateTag(TAG_PAGE_LIST);
   revalidateTag(`${TAG_USER_INFO}-${id}`);
+  return true;
 }
 
 export async function editOnlyUsername(userInfo: any) {
   const session = await getSession();
   const id = session.id!;
+  const currentUser = await prismaDB.user.findUnique({
+    where: { id },
+    select: { username: true },
+  });
+  if (currentUser?.username !== userInfo.username) {
+    const existingUser = await prismaDB.user.findFirst({
+      where: {
+        username: userInfo.username,
+        NOT: { id },
+      },
+    });
+    if (existingUser) {
+      return false;
+    }
+  }
   await prismaDB.user.update({
     where: {
       id,
@@ -71,6 +81,7 @@ export async function editOnlyUsername(userInfo: any) {
   });
   revalidateTag(TAG_PAGE_LIST);
   revalidateTag(`${TAG_USER_INFO}-${id}`);
+  return true;
 }
 
 export async function deleteUser(id: number) {
@@ -102,14 +113,28 @@ export async function editProfile(_: any, formData: FormData) {
       data.photo = null;
     }
   }
-  const results = await dataSchema.safeParseAsync(data);
+  const results = dataSchema.safeParse(data);
   if (!results.success) {
     return results.error.flatten();
   } else {
     if (data.photo) {
-      await editAvatarAndUsername(data);
+      const success = await editAvatarAndUsername(data);
+      if (!success) {
+        return {
+          fieldErrors: {
+            username: ["이미 사용하고 있는 닉네임입니다"],
+          },
+        };
+      }
     } else {
-      await editOnlyUsername(data);
+      const success = await editOnlyUsername(data);
+      if (!success) {
+        return {
+          fieldErrors: {
+            username: ["이미 사용하고 있는 닉네임입니다"],
+          },
+        };
+      }
     }
     redirect("/mypage");
   }
