@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://rescue-of-pets.vercel.app",
     images: {
-      url: "/again.png",
+      url: "/opengraph-image.png",
     },
   },
   icons: {
