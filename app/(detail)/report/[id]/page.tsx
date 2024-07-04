@@ -45,7 +45,13 @@ export default async function ReportDetail({
       <DetailTopBar isOwner={isOwner} id={report.id} category="report" />
       <ProfileBar avatar={avatar} username={username} createdAt={createdAt} />
       <div className="relative aspect-square">
-        <Image src={photo} alt={species} fill className="object-cover" />
+        <Image
+          src={photo}
+          alt={species}
+          fill
+          priority
+          className="object-cover"
+        />
       </div>
       <div className="flex flex-col p-4 pb-[52px]">
         <div className="flex items-center justify-between mb-4">

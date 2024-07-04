@@ -36,7 +36,14 @@ export default function TemporaryProtectionCard({
       href={`/temporary-protection/${id}`}
     >
       <div className="relative size-32 overflow-hidden rounded-md flex-shrink-0">
-        <Image fill src={photo} alt="구조 동물 사진" className="object-cover" />
+        <Image
+          fill
+          sizes="128px"
+          priority
+          src={photo}
+          alt="구조 동물 사진"
+          className="object-cover"
+        />
       </div>
       <div className="flex flex-col px-2 overflow-hidden">
         <div className="flex items-center gap-2">

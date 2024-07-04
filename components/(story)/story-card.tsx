@@ -54,6 +54,8 @@ export default function StoryCard({
                 src={photo}
                 alt="반려동물 사진"
                 fill
+                sizes="112px"
+                priority
                 className="object-cover"
               />
             </div>

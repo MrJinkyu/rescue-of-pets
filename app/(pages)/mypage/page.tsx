@@ -22,6 +22,7 @@ export default async function MyPage() {
               alt={userInfo.username}
               width={96}
               height={96}
+              priority
             />
           </div>
         ) : (

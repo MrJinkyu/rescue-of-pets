@@ -39,7 +39,14 @@ export default function ReportCard({
       href={`/report/${id}`}
     >
       <div className="relative aspect-square overflow-hidden rounded-md">
-        <Image fill src={photo} alt="유기 동물 사진" className="object-cover" />
+        <Image
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
+          src={photo}
+          alt="유기 동물 사진"
+          className="object-cover"
+        />
       </div>
       <div className="flex items-center gap-2 py-2">
         <ReportIsActive isActive={isActive} />
