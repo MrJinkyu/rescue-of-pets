@@ -14,13 +14,13 @@ export default function ReportInfo({ title, value, size }: CardInfoProps) {
       >
         {title}
       </span>
-      <div
+      <span
         className={`${
           size === "sm" ? "text-sm w-5/6" : "text-xs"
-        } font-semibold overflow-hidden flex-wrap`}
+        } font-semibold overflow-hidden whitespace-nowrap truncate`}
       >
         {value}
-      </div>
+      </span>
     </div>
   );
 }
