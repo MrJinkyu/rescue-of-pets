@@ -13,7 +13,8 @@ const dataSchema = z.object({
   }),
   rescuePlace: z
     .string({ required_error: "구조 장소는 필수 항목입니다" })
-    .min(1, "구조 장소는 최소 1자 이상입니다"),
+    .min(1, "구조 장소는 최소 1자 이상입니다")
+    .max(25, "구조 장소는 최대 25자 이하로 간결하게 작성해주세요"),
 });
 
 export async function addTemporaryProtection(data: any) {

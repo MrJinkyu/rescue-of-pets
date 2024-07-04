@@ -13,16 +13,20 @@ const dataSchema = z.object({
   }),
   name: z
     .string({ required_error: "이름은 필수 항목입니다" })
-    .min(1, "이름은 최소 1자 이상입니다"),
+    .min(1, "이름은 최소 1자 이상입니다")
+    .max(25, "이름은 최대 20자 이하로 간결하게 작성해주세요"),
   color: z
     .string({ required_error: "털색은 필수 항목입니다" })
-    .min(1, "털색은 최소 1자 이상입니다"),
+    .min(1, "털색은 최소 1자 이상입니다")
+    .max(25, "털색은 최대 20자 이하로 간결하게 작성해주세요"),
   characteristics: z
     .string({ required_error: "특징은 필수 항목입니다" })
-    .min(1, "특징은 최소 1자 이상입니다"),
+    .min(1, "특징은 최소 1자 이상입니다")
+    .max(25, "특징은 최대 25자 이하로 간결하게 작성해주세요"),
   missingPlace: z
     .string({ required_error: "실종 장소는 필수 항목입니다" })
-    .min(1, "실종 장소는 최소 1자 이상입니다"),
+    .min(1, "실종 장소는 최소 1자 이상입니다")
+    .max(25, "실종 장소는 최대 25자 이하로 간결하게 작성해주세요"),
 });
 
 export async function addReport(data: any) {
