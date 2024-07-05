@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [Meet Again](https://rescue-of-pets.vercel.app/)
 
-## Getting Started
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FMrJinkyu%2Frescue-of-pets&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
-First, run the development server:
+`#개인프로젝트` `#반려동물입양` `#실종신고` `#일상기록`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+반려동물 입양, 유기 동물 실종 신고 등 동물과 사람을 이어주는 서비스. **Meet Again - JinKyu**   
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![밋어겐](https://github.com/MrJinkyu/rescue-of-pets/assets/87935496/438b143f-50e5-413f-820a-c2421754f216)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**데모 사이트 바로 가기 👉 [클릭!](https://rescue-of-pets.vercel.app/)**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<br>
 
-## Learn More
+# ⛰️ Background
+반려동물을 임시 보호하고 있을 때, 잃어버렸을 때, 그리고 소중한 일상을 기록하고 싶을 때 여러 상황을 해결할 수 있는 서비스를 제공합니다.
 
-To learn more about Next.js, take a look at the following resources:
+<br>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 🛠 Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+| 페이지 | 설명 |
+| --- | --- |
+| 임시보호 | 반려동물 임시보호 게시글 CRUD |
+| 실종신고 | 유기동물 실종신고 게시글 CRUD |
+| 스토리 | 반려동물 일상기록 게시글 CRUD, 좋아요, 댓글 |
+| 채팅 | 채팅목록 조회, 채팅방 생성, 채팅방 삭제, 실시간 채팅 |
+| 마이메뉴 | 프로필 수정, 내 게시글 조회 |
+| 로그인 | 유효성 검사, 로그인 |
+| 회원가입 | 유효성 검사, 회원가입 |
 
-## Deploy on Vercel
+### 테스트 계정
+| 아이디 | 비밀번호 |
+| --- | --- |
+| test2@gmail.com | tttt2222! |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<br>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# 🪃 Skills
+
+- Next.js
+- Zod
+- Prisma
+- Tailwind CSS
+- Cloudinary
+- Postgres
+- Supabase
+
+<br>
+
+# 🪛 Project Control
+
+- Version Control: Git, Github
+- Task Control: Notion
+
+<br>
+
+# 🚀 Deployment
+
+- Client: Vercel
+
+<br>
