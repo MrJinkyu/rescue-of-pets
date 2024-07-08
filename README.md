@@ -32,7 +32,7 @@
 ### 테스트 계정
 | 아이디 | 비밀번호 |
 | --- | --- |
-| test2@gmail.com | tttt2222! |
+| test2@gmail.com | tttt2222 |
 
 <br>
 
@@ -43,7 +43,7 @@
 - Prisma
 - Tailwind CSS
 - Cloudinary
-- Postgres
+- Vercel Postgre
 - Supabase
 
 <br>
